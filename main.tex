@@ -1,0 +1,44 @@
+\documentclass[a4paper,english,11pt]{article}
+\usepackage[english]{babel}
+\usepackage[intlimits]{amsmath}
+\usepackage{amsfonts, amsthm}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
+\setmathfont{TeX Gyre Pagella Math}
+\setmathfont[range=\symcal]{Asana Math}
+\usepackage{microtype}
+\usepackage[draft]{fixme}
+\usepackage{tikz}
+\usepackage{authblk}
+
+\usetikzlibrary{cd}
+
+%\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[backend=biber,doi=true,style=numeric,maxnames=3,maxbibnames=9]{biblatex}
+\addbibresource{bibliography.bib}
+\renewcommand*{\bibfont}{\small}
+
+\input{common.tex}
+
+\title{Tralala}
+
+\author[1]{a}
+\author[1]{b}
+\author[1]{c}
+
+\affil[1]{\footnotesize Dupidupdiou}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% Let's please do multi-file?
+
+
+\printbibliography
+
+\end{document}
