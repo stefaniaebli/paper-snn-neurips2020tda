@@ -1,0 +1,111 @@
+\documentclass{article}
+
+% We suggest
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2020
+
+% ready for submission
+% \usepackage{neurips_2020}
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+%     \usepackage[preprint]{neurips_2020_tda}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+\usepackage[final,nonatbib]{neurips_2020_tda}
+
+% to avoid loading the natbib package, add option nonatbib:
+%\usepackage[nonatbib]{neurips_2020_tda}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{microtype}      % microtypography
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{paralist}       % in-paragraph enumerations
+\usepackage{siunitx}        % SI units
+
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{microtype}
+%\usepackage[draft]{fixme}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+
+
+\usepackage[backend=bibtex,doi=true,style=numeric,maxnames=3,maxbibnames=6]{biblatex}
+\addbibresource{bibliography.bib}
+%\renewcommand*{\bibfont}{\footnotesize}
+
+\urlstyle{same}
+
+\title{
+  Simplicial Neural Networks
+}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+\author{%
+  David S.~Hippocampus\thanks{Use footnote for providing further information
+    about author (webpage, alternative address)---\emph{not} for acknowledging
+    funding agencies.} \\
+  Department of Computer Science\\
+  Cranberry-Lemon University\\
+  Pittsburgh, PA 15213 \\
+  \texttt{hippo@cs.cranberry-lemon.edu} \\
+  % examples of more authors
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \AND
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+}
+\input{common.tex}
+\begin{document}
+
+\maketitle
+
+\input{abstract.tex}
+
+\input{introduction.tex}
+
+\input{scnn.tex}
+
+\input{experiments.tex}
+
+\input{discussion.tex}
+
+
+\clearpage
+
+\printbibliography
+
+\end{document}

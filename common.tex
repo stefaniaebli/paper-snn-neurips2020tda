@@ -11,10 +11,12 @@
 
 \newcommand{\RR}{\ensuremath{\mathbb{R}}}
 \newcommand{\ZZ}{\ensuremath{\mathbb{Z}}}
+\newcommand{\RP}{\ensuremath{\mathbb{RP}}}
 \newcommand{\lapu}{\ensuremath{\mathcal{L}^{\text{up}}}}
 \newcommand{\lapd}{\ensuremath{\mathcal{L}^{\text{down}}}}
 \newcommand{\lap}{\ensuremath{\mathcal{L}}}
 \newcommand{\iso}{\ensuremath{\cong}}
+\newcommand{\rank}{\ensuremath{\text{rank}}}
 
 \newcommand{\ie}{}
 \def\ie/{i.e.}
@@ -23,13 +25,44 @@
 \newcommand{\etc}{}
 \def\etc/{etc.}
 
+\newcommand{\gardfix}[2]{{\color{red}#1}\fxfatal{#2}}
 \newcommand{\fix}[2]{{\color{red}#1}\fxfatal{#2}}
+\newcommand{\thmcite}[1]{\citeauthor{#1}, \citeyear{#1}~\cite{#1}}
 \newcommand{\suchthat}{\ensuremath{\, \mid \,}}
 
+\newcommand{\Reffig}[1]{Figure~\ref{fig:#1}}
+\newcommand{\reffig}[1]{figure~\ref{fig:#1}}
+\newcommand{\refeq}[1]{equation~\eqref{eq:#1}}
+\newcommand{\refsec}[1]{section~\ref{sec:#1}}
+
 \newcommand{\ip}[2]{\ensuremath{\left\langle #1 , #2 \right\rangle}}
+\newcommand{\norm}[1]{\ensuremath{\lVert #1 \rVert}}
 
 \newcommand{\placeholderfigure}{\begin{tikzpicture}
       \draw[help lines] (0, 0) grid (8, 4);
       \node () at (4,2) {PLACEHOLDER};
   \end{tikzpicture}
 }
+
+\DeclareMathOperator{\cut}{cut}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\VR}{VR}
+
+
+%---------For commenting--------
+\usepackage{color}
+\definecolor{darkorchid}{rgb}{0.6,0.196,0.8}
+\newcommand{\todo}[1]{{\color{red}[[\textbf{TODO: }#1]]}}
+\newcommand{\stefania}[1]{{\color{blue}[[\textbf{Stefania says: }#1]]}}
+\newcommand{\gard}[1]{{\color{green}[[\textbf{Gard says: }#1]]}}
+
+%--------For Referencing--------
+\newcommand{\appendref}[1]{Section~\ref{append:#1}}
+\newcommand{\figref}[1]{Figure~\ref{fig:#1}}
+\newcommand{\exref}[1]{Example~\ref{ex:#1}}
+\newcommand{\secref}[1]{Section~\ref{sec:#1}}
+\newcommand{\Thmref}[1]{Theorem~\ref{thm:#1}}
+\newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
+\newcommand{\defref}[1]{Definition~\ref{def:#1}}
+
