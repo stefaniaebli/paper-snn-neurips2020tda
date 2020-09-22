@@ -5,9 +5,9 @@ An important step in preprocessing many kinds of input data in TDA is constructi
 
 We evaluate the performance of the SNN on the task of predicting missed input data. 
 Specifically, given a fixed co-authorship complex missing data is introduced 
-at random on the training co-chains at $4$ levels: $10\%,  20\%,  30\%$, and $50\% $.  We trained a SNN composed by $3$-layers with $30$ convolutional filters. \stefania{Say how laplacian is build and size input} The training input is given by the citations on the co-authorship complex where the random missing data is substituted by the median of the known data. We used the $L_1$ norm as reconstruction loss over the known elements an the Adam optimizer with learning rate of $1\times 10^{-3}$. \stefania{Clarify what is test and train} Our evaluation  focus on the accuracy of the network in predicting the missing data. A predicted citation is considered correct if the predicted value differs of at most $1$ from the actual number of citations.
+at random on the training co-chains at $4$ levels: $10\%,  20\%,  30\%$, and $50\% $.   As in a typical pipeline for this task, in our approach missing data is first replaced by some values. In our case the training input is given by the citations on the co-authorship complex where the random missing data is substituted by the median of the known data. We trained a SNN composed by $3$-layers with $30$ convolutional filters of degree $5$. We used the $L_1$ norm as reconstruction loss over the known elements an the Adam optimizer with learning rate of $1\times 10^{-3}$. The SNN was trained for $1000$ iterations. We then test the performance of the network on its accuracy in predicting the missing data. A predicted citation is considered correct if the predicted value differs of at most $1$ from the actual number of citations. The prediction error is the absolute value of the difference between the predicted citation and the actual value of the citation. 
 
-Figure~\ref{fig:accuracy} shows the accuracy results of the prediction of the missing citations on CC1 (Co-authorship Complex 1). The number of simplices per dimension in CC1 can be seen in Table~\ref{table:Simplices-coauthor}
+Figure~\ref{fig:accuracy} shows the accuracy of the SNN in prediction missing citations on CC1 (Co-authorship Complex 1, Table~\ref{table:Simplices-coauthor}). The distribution of the prediction error is shown in Figure~\ref{fig:error}. 
 \begin{table}
   \caption{%
   Number of simplices
@@ -31,30 +31,62 @@ Figure~\ref{fig:accuracy} shows the accuracy results of the prediction of the mi
 %\end{figure}
 \begin{figure}[htbp]
   \centering 
-\includegraphics[scale=0.38]{./figures/accuracy_network1.png}
+\includegraphics[scale=0.4]{./figures/accuracy_network1.png}
  \caption{Accuracy of SNN in predicting missing citations } \label{fig:accuracy}
 \end{figure}
-
-As a second assessment we evaluate how accurately a SNN pretrained on a co-authorship complex can predict citations on a different complex. The SNN with the same characteristic as above was trained on CC2 (Co-authorship Complex 2)
-
-
-\stefania{Write number of iterations!}
-
-
-\begin{figure}[htbp]
-  \centering
- 
-\includegraphics[scale=0.38]{./figures/accuracy_network1_pretrained.png}
-  \caption{Accuracy in predicting missing citations with a pretrained SNN \stefania{Transfer learning?}} \label{fig:accuracy-pretrained}
-\end{figure}
-
 \begin{figure}[htbp]
 
   \centering
  \hspace{-6cm}
  
-\includegraphics[scale=0.4]{./figures/Error_start150250_seed6666_notsee30.png}
+\includegraphics[scale=0.4]{./figures/Error_dist_start150250_seed6666_notsee40.png}
   \caption{Distribution of the prediction's error} \label{fig:error}
 \end{figure}
 
-\stefania{PLot only error distribution in log-scale}
+As a second assessment of our network we use transfer learning . In particular, we test how accurately a SNN pretrained on a co-authorship complex can predict citations on a different complex. Figure shows the test accuracy on predicting missing values of the SNN on CC2 (Co-authorship Complex 2, see Table) and evaluate in predicting the missing values of CC1.
+
+\stefania{Say computations are done up to dimension 3}
+
+
+\begin{figure}[htbp]
+  \centering
+ 
+\includegraphics[scale=0.4]{./figures/accuracy_network1_pretrained.png}
+  \caption{Accuracy in predicting missing citations with a pretrained SNN \stefania{Transfer learning?}} \label{fig:accuracy-pretrained}
+\end{figure}
+
+
+
+
+\begin{table*}
+\begin{center}
+\begin{minipage}{0.4\linewidth}	 
+ 
+  \label{Simplices-coauthor}
+  \centering
+  \begin{tabular}{lll}
+    \cmidrule(r){1-3}
+    Papers   & Authors     & Citations  \\
+    \midrule
+    Paper I & A, B, C  & 100  \\
+    Paper II &  A, B. & 50\\ 
+    Paper III & C, D. & 4\\ 
+    \bottomrule
+  \end{tabular}
+\end{minipage} 
+\begin{minipage}{0.1\linewidth}
+\begin{center}
+\begin{tikzpicture}
+\node (a) at (0,0){};
+\node (b) at (1.5,0){};
+\draw[ |->,line width=0.5pt] (a) edge node [left] {} (b) ;
+\end{tikzpicture}	        
+\end{center}
+\end{minipage} \hspace{0.0cm}
+\begin{minipage}{0.4\linewidth}
+\begin{center}
+\includegraphics[height=2.5cm]{./figures/cc.png}       
+\end{center}
+\end{minipage} 
+\end{center}
+\end{table*} 
