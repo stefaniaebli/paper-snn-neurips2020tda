@@ -1,5 +1,5 @@
 \section{Proposed Technique}
-FIXME
+In this section we introduce the simplicial neural networks (SNNs). The first step to generalize GNNs to simplicial complexes is to design localized convolutional filters on simplicial complexes. In other words, we define a localized message passing operation on simplices which allow us to learn data in higher-dimensions.
 
 \subsection{Simplicial  Complexes}
 A \emph{simplicial complex} is a collection of finite sets closed under taking subsets. We refer to a set in a simplicial complex as a \emph{simplex} of \emph{dimension $p$} if it has cardinality $p+1$. Such a $p$-simplex has $p+1$ \emph{faces} of dimension $p-1$, namely the sets omitting one element, which we will denote as $[v_0,\dotsc,\hat{v}_i,\dotsc, v_p]$ when omitting the $i$'th element. While this definition is entirely combinatorial, we will soon see that there is a geometric interpretation, and it will make sense to refer to and think of $0$-simplices as \emph{vertices}, $1$-simplices as \emph{edges}, $2$-simplices as \emph{triangles}, $3$-simplices as \emph{tetrahedra}, and so forth (see Figure~\ref{fig:co-authoship-complex}).
@@ -19,13 +19,14 @@ where $\hat{v}_i$ denotes that the $i$-th vertex has been omitted.
 %\begin{table*}[!t]
 \savebox{\tempbox}{% compute size of tabulat
 \scriptsize{
-\begin{tabular}{lll}
+\begin{tabular}{llll}
     \cmidrule(r){1-3}
     Papers   & Authors     & Citations  \\
     \midrule
     Paper I & A, B, C  & 100  \\
     Paper II &  A, B & 50\\ 
-    Paper III & C, D & 4\\ 
+    Paper III & A, D & 10\\ 
+    Paper IV & C, D & 4\\ 
     \bottomrule
   \end{tabular}
 }}%
@@ -33,17 +34,34 @@ where $\hat{v}_i$ denotes that the $i$-th vertex has been omitted.
 \hfil\begin{minipage}[b]{\tempwidth}%
 \raisebox{-\height}{\usebox{\tempbox}}%
 %\vspace{-7pt}
-\captionof{table}{Data}%
+\scriptsize{\caption*{a) Data}}%
 \label{table:data}%
 \end{minipage}%
-\savebox{\tempbox}{\includegraphics[height=2.3cm]{./figures/cc.png}}%
+\savebox{\tempbox}{\includegraphics[height=2.3cm]{./figures/cc1.png}}%
 \settowidth{\tempwidth}{\usebox{\tempbox}}%
 \hfil\begin{minipage}[b]{\tempwidth}%
 \raisebox{-\height}{\usebox{\tempbox}}%
-\captionof{figure}{Co-authorship complex}%
+\scriptsize{\captionof*{figure}{b) Co-authorship complex}}%
 \label{fig:co-authoship-complex}%
 \end{minipage}%
 \vspace{5pt}
+%\end{table*}
+\savebox{\tempbox}{\scriptsize{
+\begin{blockarray}{cccccc}
+\tiny{AB} & \tiny{AC} & \tiny{AD} & \tiny{BC} & \tiny{CD} \\
+\begin{block}{(ccccc)c}
+  3 & 0 & 1 & 0 & 0 & \tiny{AB} \\
+  0 & 3 & 1 & 0 & -1 & \tiny{AC} \\
+  1 & 1 & 2 & 0 & 1 & \tiny{AD} \\
+  0 & 0 & 0 & 3 & -1 & \tiny{BC}\\
+  0 & -1 & 1 & -1 & 2 & \tiny{CD}\\
+\end{block}
+\end{blockarray}}}%
+\settowidth{\tempwidth}{\usebox{\tempbox}}%
+\hfil\begin{minipage}[b]{\tempwidth}%
+\raisebox{-\height}{\usebox{\tempbox}}%
+\scriptsize{\captionof*{figure}{c) $1$-Laplacian}}%
+\end{minipage}%
 %\end{table*}
 \caption{Example of co-authorship complex build from data}
 \end{figure}
