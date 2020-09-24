@@ -2,27 +2,9 @@
 
 
 
-Graph-based convolutional neural networks (GNNs) have recently become popular techniques in machine learning~\cite{defferrard2016convolutional, bronstein2017geometric, wu2020survey}. Compared to classical deep neural networks dealing with regular grid-structured data, graph neural networks take into account irregular graphs to better learn complex interactions in the data~\cite{battaglia2018relational}. Although graphs can describe complex systems of relations ranging from biology to social science, they are intrinsically limited to modeling pairwise interactions. The advance of topological methods in machine learning~\cite{Gabrielsson2020topological, Hofer2019LearningRO, rieck2018neural}, and the earlier establishment of \emph{topological data analysis (TDA)}~\cite{carlsson2008,chazal2017,edelsbrunner2010computational,ghrist2008barcodes}, have confirmed the usefulness of viewing data through a higher-dimensional analog of graphs~\cite{moore2012,patania2017}. Such a higher-dimensional analog is called a \emph{simplicial complex}, a mathematical object whose structure can  describe $n$-fold interactions between points. Their ability to capture hidden patterns in the data has led to various applications from neurobiology~\cite{giusti2015,reimann2017} to material science~\cite{hiraoka2016}. In this paper we present \textit{simplicial neural networks (SNNs)}, a novel neural network framework designing local operations that do message passing on simplicial complexes.
-Our method, like GNNs~\cite{defferrard2016convolutional}, offers an efficient architecture thanks to our formulation of strictly localized filters only involving operations with a sparse matrix. 
-Differently from hypergraph neural networks~\cite{feng2018hypergraphs}, in SNNs the message passing operator on \emph{simplices} (of a fixed degree) is sensitive to the topological structure of the complex, a highly relevant feature in TDA.
+Graph-based convolutional neural networks (GNNs) have recently become popular techniques in machine learning~\cite{defferrard2016convolutional, bronstein2017geometric, wu2020survey}. Compared to classical deep neural networks dealing with regular grid-structured data, graph neural networks take into account irregular graphs to better learn complex interactions in the data~\cite{battaglia2018relational}. Although graphs can describe complex systems of relations ranging from biology to social science, they are intrinsically limited to modeling pairwise interactions. The advance of topological methods in machine learning~\cite{Gabrielsson2020topological, Hofer2019LearningRO, rieck2018neural}, and the earlier establishment of \emph{topological data analysis (TDA)}~\cite{carlsson2008,chazal2017,edelsbrunner2010computational,ghrist2008barcodes}, have confirmed the usefulness of viewing data through a higher-dimensional analog of graphs~\cite{moore2012,patania2017}, or as topological spaces in general.
 
+A popular such object is called a \emph{simplicial complex}, and has a structure that can describe $n$-fold interactions between points. Their ability to capture hidden patterns in the data has led to various applications from neurobiology~\cite{giusti2015,reimann2017} to material science~\cite{hiraoka2016}. In this paper we present \textit{simplicial neural networks (SNNs)}, a novel neural network framework designing\gard{I'm skeptical of the word ``designing'', but I don't know an alternative yet :-)} local operations that do message passing on simplicial complexes.
+Our method, like the GNNs~\cite{defferrard2016convolutional} that inspired it, offers an efficient architecture thanks to our formulation of strictly localized filters only involving operations with a sparse matrix.
 
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Other approaches, such as hypergraph neural networks~\cite{feng2018hypergraphs}, do not have connections to the global topological structure of the complex, a highly relevant feature in TDA. This leads us to believe that our method is more appropriate.
