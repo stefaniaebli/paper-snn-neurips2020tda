@@ -9,3 +9,6 @@
 *-blx.aux
 *-blx.bib
 *.run.xml
+/*.pdf
+*.synctex
+*.synctex.gz
