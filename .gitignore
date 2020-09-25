@@ -10,5 +10,6 @@
 *-blx.bib
 *.run.xml
 /*.pdf
+/*.dvi
 *.synctex
 *.synctex.gz
