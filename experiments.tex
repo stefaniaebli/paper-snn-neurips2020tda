@@ -1,21 +1,30 @@
 \section{Experimental results}
-In this section we present preliminary experimental results for the simplicial neural network. The datasets we analyze have been extracted from the Semantic Scholar datasets. The data consists of XXX papers together with their authors and number of citations. We retain paper with more than $5$ citations and at most $10$ authors.An important step in preprocessing many kinds of input data in TDA is constructing a simplicial complex. Our work focus on \emph{co-authorship complexes} (or \emph{collaboration complexes})~\cite{patania2017}, simplicial complexes where a paper with $k$ authors is represented by a $(k-1)$-simplex. We constructed different co-authorship complexes by considering sub-samplings from the papers set of the Semantic Scholar dataset. The sub-samplings were obtained by performing random walks (of length 80) on the nodes of the graph which vertices corresponds to the papers and edges connect papers sharing at least one author. The co-authorship complexes obtained from each sub-sampling  have corresponding $k$ cochains given by the number of shared citations of the $k$-collaborations (see Figure~\ref{fig:data2complex}).We evaluate the performance of SNNs on the task of predicting missing input data. As in a typical pipeline for this task, in our approach missing data is first replaced by some values. Specifically, given a fixed co-authorship complex missing data is introduced 
-at random on the training cochains at $4$ levels: $10\%,  20\%,  30\%$, and $50\% $.   In our case the training input is given by the citations on the co-authorship complex where the random missing data is substituted by the median of the known data. We trained a SNN composed by $3$-layers with $30$ convolutional filters of degree $5$. We used the $L_1$ norm as reconstruction loss over the known elements an the Adam optimizer with learning rate of $1\times 10^{-3}$. The SNN was trained for $1000$ iterations. We then test the performance of the network on its accuracy in predicting the missing data. A predicted citation is considered correct if the predicted value differs of at most $1$ from the actual number of citations. The prediction error is the absolute value of the difference between the predicted citation and the actual value of the citation. Figure~\ref{fig:accuracy-error} (a) shows the accuracy of the SNN in prediction missing citations on CC1 (Co-authorship Complex 1, Table~\ref{table:Simplices-coauthor}). The distribution of the prediction error is shown in Figure~\ref{fig:accuracy-error}. 
+Many real world datasets contain missing values, often encoded as blanks, NaNs or other placeholders. We evaluate the performance of the SNNs in imputing missing number of citations on simplices representing academic collaborations.
+
+\subsection{Dataset description}
+The datasets we analyze has been scraped from the Semantic Scholar Open Research Corpus~\cite{ammar18NAACL}. The data contains over 39 million published research papers in Computer Science, Neuroscience, and Biomedical science together with their authors and number of citations. We retained papers with more than $5$ citations and at most $10$ authors. An important step in preprocessing many kinds of input data in TDA is constructing a simplicial complex. Our work focus on \emph{co-authorship complexes} (or \emph{collaboration complexes})~\cite{patania2017}, simplicial complexes where a paper with $k$ authors is represented by a $(k-1)$-simplex. We constructed different co-authorship complexes by considering sub-samplings from the papers set of the Semantic Scholar dataset. The sub-samplings were obtained by performing random walks (of length $80$) on the nodes of the graph which vertices corresponds to papers and edges connect papers sharing at least one author. The co-authorship complexes obtained from each sub-sampling have corresponding $k$-cochains given by the number of shared citations of the $k$-collaborations (see Figure~\ref{fig:data2complex}).
+
+\subsection{Method}
+We evaluate the performance of the SNNs on the task of imputing missing data on the $k$-cochains ($k=0,1,2$) of the extracted co-authorship complexes. As in a typical pipeline for this task, in our approach missing data is artificially introduced by replacing a portions of the values with a constant. Specifically, given a fixed co-authorship complex missing data is introduced at random on the $k$-cochains at $4$ levels: $10\%,  20\%,  30\%$, and $50\% $. The training input is then given by the $k$-cochains where the random missing data is substituted by the median of the known data. We trained a SNN composed by $3$-layers with $30$ convolutional filters of degree $5$. We used the $L_1$ norm as reconstruction loss over the known elements an the Adam optimizer with learning rate of $1\times 10^{-3}$. The SNN was trained for $1000$ iterations. We then test the performance of the network on its accuracy in imputing missing data. A missing citation is predicted correctly if the imputed value differs of at most $1$ from the actual citation. The accuracy is defined as the percentage of missing values that has been correctly imputed and the absolute error (AE) as the magnitude of the difference between the predicted and actual citation. For the same percentage of missing values we consider different random samples of the damaged portions. Then a statistical evaluation of the performance of the network is given by the mean accuracy (MA), the mean of the accuracy over different samples and the mean absolute error (MAE), the mean of error over different samples.
+
+\subsection{Results}
+Figure~\ref{fig:accuracy-error} (a) shows the accuracy of the SNN in prediction missing citations on CC1 (Co-authorship Complex 1, for statistics on the complex see Table~\ref{table:Simplices-coauthor}). The distribution of the prediction error is shown in Figure~\ref{fig:accuracy-error}. \stefania{say about random baseline}
 \begin{table}[htbp]
-  \caption{%
-  Number of simplices
-  }
   \label{table:Simplices-coauthor}
   \centering
   \scriptsize{
   \begin{tabular}{llllllllllll}
     \cmidrule(r){1-12}
-    Dimension   & 0     & 1  & 2     & 3 & 4     & 5 & 6    & 7 & 8   & 9 & 10\\
+    Dimension:   & 0     & 1  & 2     & 3 & 4     & 5 & 6    & 7 & 8   & 9 & 10\\
     \midrule
     CC1 & 352  & 1474  & 3285  & 5019  & 5559  & 4547  & 2732  & 1175  & 343 & 61 & 5\\
     CC2 & 1126 & 5059 & 11840 & 18822 & 21472 & 17896  & 10847 & 4673 & 1357 & 238 & 19\\ 
     \bottomrule
   \end{tabular}}
+  \vspace{2pt}
+  \caption{%
+  Number of simplices in co-authorship complexes from the Semantic Scholar dataset.
+  }
 \end{table}
 %\begin{figure}[htbp]
 %  \centering
@@ -42,10 +51,10 @@ at random on the training cochains at $4$ levels: $10\%,  20\%,  30\%$, and $50\
    \includegraphics[scale=0.36]{./figures/Error_dist_start150250_seed6666_notsee40.png}
  % \caption{Distribution of the prediction's error} \label{fig:error}
 \end{subfigure}
-\caption{(a) Accuracy of SNN in predicting missing citations. (b)Distribution of the prediction's error}
+\caption{(a) Accuracy of SNN in predicting missing citations. (b)Distribution of the prediction's error for $40\%$ missing values \stefania{Add error on bins}}
 \label{fig:accuracy-error}
 \end{figure}
-Transfer learning was used as a second assessment for our network. In particular, we test how accurately a SNN pretrained on a co-authorship complex can predict citations on a different complex. Figure ~\ref{fig:transfer-learning} shows the accuracy on predicting missing citations on CC1 using the above architecture of SNN trained on CC2 (Co-authorship Complex 2, see Table~\ref{table:Simplices-coauthor}).
+As a second assessment for our network we used transfer learning. In particular, we test how accurately a SNN pretrained on a co-authorship complex can predict citations on a different complex. Figure ~\ref{fig:transfer-learning} shows the accuracy on predicting missing citations on CC1 using the above architecture of SNN trained on CC2 (Co-authorship Complex 2, see Table~\ref{table:Simplices-coauthor}).
 
 \stefania{Tell conclusion results, say something about baseline, say something about dimension 2.}
 \stefania{Say length random walks}
@@ -57,3 +66,21 @@ Transfer learning was used as a second assessment for our network. In particular
   \caption{Accuracy in predicting missing citations with a pretrained SNN } \label{fig:transfer-learning}
 \end{figure}
 
+%\scriptsize{
+\begin{table}[htbp]
+  \caption{%
+  Accuracy
+  }
+  \label{table:Simplices-coauthor}
+  \centering
+  \scriptsize{
+  \begin{tabular}{c|cccccc}
+    \cmidrule(r){1-7}
+    MAE   & CC1 - dim 0   & CC1 - dim 1   & CC1 - dim 2   & CC2 - dim 0  & CC2 - dim 1  & CC2 - dim 2 \\
+    \midrule
+    Mean & 1  & 12 & 1  & 1 & 1  & 1\\
+    Median & 16 & 50 & 1  & 1& 1  & 1\\
+    $k$-NN & 16 & 50& 1  & 1& 1  & 1 \\
+    \bottomrule
+  \end{tabular}}
+\end{table}%}

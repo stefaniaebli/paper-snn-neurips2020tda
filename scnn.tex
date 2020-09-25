@@ -6,9 +6,8 @@ A \emph{simplicial complex} is a collection of finite sets closed under taking s
 a simplicial complex $K$. The elements of $C_p(K)$ are called \emph{$p$-chains}. The 
 $p$-cochain (vector) space $C^p(K)$ is defined as the dual of $C_p(K)$, i.e. $C^p(K)=\{\hom(K,\RR)\}$. The basis of $C^p$ is given by the dual basis $K_p^*$. These vector spaces come equipped with \emph{coboundary maps}, namely linear maps $\delta^p:C_p\to C^{p+1}$ defined by
 \begin{equation*}
-\delta_p(f([v_0,\dotsc,v_{p+1}])) = \sum_{i=0}^{p+1} (-1)^i f([v_0,\dotsc,\hat{v}_i,\dotsc,v_{p+1}])
+\delta_p(f([v_0,\dotsc,v_{p+1}])) = \sum_{i=0}^{p+1} (-1)^i f([v_0,\dotsc,\hat{v}_i,\dotsc,v_{p+1}]).
 \end{equation*}
-where $\hat{v}_i$ denotes that the $i$-th vertex has been omitted.
 \begin{figure}[htpb]
 %\begin{table*}[!t]
 \savebox{\tempbox}{% compute size of tabulat
@@ -62,9 +61,9 @@ where $\hat{v}_i$ denotes that the $i$-th vertex has been omitted.
 
 \subsection{Simplicial Laplacians}
 We are in this paper concerned with finite simplicial complexes. In particular, it is not necessary for them to come equipped with some embedding into Euclidean space, nor do we demand that they triangulate a Riemannian manifold. To define a discrete version of the Laplacian for simplicial complexes, one simply takes the linear adjoint of the coboundary operator with respect to the inner product, defining $\delta_i^\ast:C^{i+1}\to C^i$ by
-\begin{align*}
-  \ip{\delta_i f_1}{f_2}_{i+1} =\ip{f_1}{\delta_i^\ast f_2}_{i} \quad \forall f_1\in C^{i}(K), f_2 \in C^{i+1}(K).
-\end{align*}
+$
+  \ip{\delta_i f_1}{f_2}_{i+1} =\ip{f_1}{\delta_i^\ast f_2}_{i},\ \forall f_1\in C^{i}(K), f_2 \in C^{i+1}(K).
+$
 In analogy with Hodge--de Rham theory~\cite{madsen1997calculus}, we then define the \emph{degree-$i$ simplicial Laplacian} of a simplicial complex $K$ as the linear operator $\lap_i:C^i(K)\to C_i(K)$ such that
 \begin{equation*}
   \lap_i = \lapu_i + \lapd_i,\\
