@@ -58,9 +58,10 @@ $p$-cochain (vector) space $C^p(K)$ is defined as the dual of $C_p(K)$, i.e. $C^
 
 \subsection{Simplicial Laplacians}
 We are in this paper concerned with finite simplicial complexes. In particular, it is not necessary for them to come equipped with some embedding into Euclidean space, nor do we demand that they triangulate a Riemannian manifold. To define a discrete version of the Laplacian for simplicial complexes, one simply takes the linear adjoint of the coboundary operator with respect to the inner product, defining $\delta_i^\ast:C^{i+1}\to C^i$ by
-$
+\begin{equation*}
   \ip{\delta_i f_1}{f_2}_{i+1} =\ip{f_1}{\delta_i^\ast f_2}_{i},\ \forall f_1\in C^{i}(K), f_2 \in C^{i+1}(K).
-$
+\end{equation*}
+
 In analogy with Hodge--de Rham theory~\cite{madsen1997calculus}, we then define the \emph{degree-$i$ simplicial Laplacian} of a simplicial complex $K$ as the linear operator $\lap_i:C^i(K)\to C_i(K)$ such that
 \begin{equation*}
   \lap_i = \lapu_i + \lapd_i,\\
