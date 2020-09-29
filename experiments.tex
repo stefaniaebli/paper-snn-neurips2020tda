@@ -55,7 +55,7 @@ The results in Figure~\ref{fig:accuracy-error} (a-b) show the MA and MAE of the 
 \caption{(a) Mean Accuracy $\pm$ std over 5 samples of SNN in imputing missing citations on CC1. (b)Mean Absolute Error $\pm$ std over 5 samples of SNN for $40\%$ missing values in CC1. \stefania{Add error on bins}}
 \label{fig:accuracy-error}
 \end{figure}
-As a second assessment for our network we evaluate how accurately an SNN pretrained on a co-authorship complex can impute missing citations on a different complex. This is build over the assumption that co-authorship complexes share a similar structure. In Figure ~\ref{fig:transfer-learning} we show the MA in predicting missing citations on CC1 using the above architecture of SNN trained on CC2 (Co-authorship Complex 2, see Table~\ref{table:Simplices-coauthor}).
+As a second assessment for our network we evaluate how accurately an SNN pretrained on a co-authorship complex can impute missing citations on a different complex. This is build over the assumption that co-authorship complexes share a similar structure. In Figure~\ref{fig:transfer-learning} we show the MA in predicting missing citations on CC1 using the above architecture of SNN trained on CC2 (Co-authorship Complex 2, see Table~\ref{table:Simplices-coauthor}).
 We compared our results with imputation methods based on statistical techniques, namely replacing missing data with the median or mean of the known data and inferring the missing values from the $(k-1)$ and $(k+1)$ neighbors of the simplices ($k$-simplicial neighbor $k$-sn). As Table~\ref{table:comparison-SNN} shows, SNNs outperform statistical techniques. Comparison with other state of the art imputations algorithms is left for future work.
 \begin{figure}[htbp]
   \centering
