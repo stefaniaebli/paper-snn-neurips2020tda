@@ -1,3 +1,24 @@
-\section{Supplementary material}
-
+\section{Supplementary material}\label{sec:supp_material}
 \gard{Let's move at least the simplex count table here. NeurIPS says: \emph{This length does not include references or any supplementary materials. Reviewers are not obliged to read supplementary materials when reviewing the paper.}}
+
+
+\textbf{(A) Statistics on the simplicial complexes}
+We report in the following table the number of simplices in dimension $k=0,1,2$ of the co-authorship complexes CC1 and CC2.
+\begin{table}[htbp]
+  \centering
+  \scriptsize{
+  \begin{tabular}{llllllllllll}
+    \cmidrule(r){1-12}
+    Dimension:   & 0     & 1  & 2     & 3 & 4     & 5 & 6    & 7 & 8   & 9 & 10\\
+    \midrule
+    CC1 & 352  & 1474  & 3285  & 5019  & 5559  & 4547  & 2732  & 1175  & 343 & 61 & 5\\
+    CC2 & 1126 & 5059 & 11840 & 18822 & 21472 & 17896  & 10847 & 4673 & 1357 & 238 & 19\\ 
+    \bottomrule
+  \end{tabular}}
+  \vspace{2pt}
+  \caption{%
+  Number of simplices in co-authorship complexes from the Semantic Scholar dataset.
+  } \label{table:Simplices-coauthor}
+\end{table}
+
+\textbf{(B) Glossary Statistics}\stefania{I just placed here this part. I will change it}A missing citation is predicted correctly if the imputed value differs of at most $1$ from the actual citation. The accuracy is defined as the percentage of missing values that has been correctly imputed and the absolute error (AE) as the magnitude of the difference between the predicted and actual citation. For the same percentage of missing values we consider different random samples of the damaged portions. Then a statistical evaluation of the performance of the network is given by the mean accuracy (MA), the mean of the accuracy over different samples and the mean absolute error (MAE), the mean of the error over different samples.
