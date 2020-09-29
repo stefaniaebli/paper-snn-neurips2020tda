@@ -1,6 +1,6 @@
-\subsection{Simplicial Convolutional Neural Networks}
+\subsection{Simplicial convolutions}
 
-Classical CNNs were introduced with image data, or other similarly structured data, in mind. Indeed, they can be seen as a way to exploit the regularity of pixels (or voxels, or toxels, or so forth) and their neighbor relations. This is achieved by a convolutional layer being of the form $f\ast \varphi_W$ where $\varphi_W$ is a function \emph{with small support} parameterized by some learnable weights $W$, and $\ast$ denotes convolution. Typically, $\varphi_W$ just takes constant values determined by $W$ in a small spatial region, and is zero elsewhere. While this seems like an overly complicated\gard{Oh I wanna make the pun so bad and say \emph{convoluted}!} way to phrase an idea that is nearly trivial on a regular rectangular domain, it does lend itself to a spectral interpretation that we exploit to formulate the CNNs in a much more general setting, as was originally done for graph CNNs.
+Classical CNNs were introduced with image data, or other similarly structured data, in mind. Indeed, they can be seen as a way to exploit the regularity of pixels (or voxels, or toxels, and so forth) and their neighbor relations. This is achieved by a convolutional layer being of the form $f\ast \varphi_W$ where $\varphi_W$ is a function \emph{with small support} parameterized by some learnable weights $W$, and $\ast$ denotes convolution. Typically, $\varphi_W$ just takes constant values determined by $W$ in a small spatial region, and is zero elsewhere. While this seems like an overly complicated\gard{Oh I wanna make the pun so bad and say \emph{convoluted}!} way to phrase an idea that is nearly trivial for discrete data on a regular rectangular domain, it does lend itself to a spectral interpretation that we exploit to formulate the CNNs in a much more general setting, as was originally done for graph CNNs.
 
 Motivated by the fact that the discrete Fourier transform of real-valued functions on an $n$-dimensional cubical grid coincides with decomposition of such a function into the eigenfunctions of the graph Laplacian for that grid, we define the Fourier transform of real $p$-cochains on a simplicial complex with Laplacians $\mathcal{L}_p$ as
 \begin{align*}
@@ -9,32 +9,26 @@ Motivated by the fact that the discrete Fourier transform of real-valued functio
 \end{align*}
 where the $e_i$'s are the eigencochains of $\mathcal{L}_p$ ordered ascendingly by eigenvalues (which we label $\lambda_1\leq\dotsm\leq\lambda_{\lvert K_p \rvert}$). $\mathcal{F}_p$ is invertible since $\mathcal{L}_p$ is diagonalizable.
 
-Recall that for function classes for which it is defined, the ordinary notions of Fourier transform obey
-\begin{equation*}
-  \mathcal{F}(f\ast g)=\mathcal{F}(f)\mathcal{F}(g),
-\end{equation*}
-where the right hand side denotes pointwise multiplication. This will be our definition of convolution in the simplicial setting. Indeed, for cochains $c,c'\in C^p(K)$ we define their convolution as the cochain
+Recall that for function classes for which it is defined, the ordinary notions of Fourier transform obey $\mathcal{F}(f\ast g)=\mathcal{F}(f)\mathcal{F}(g)$, where the right hand side denotes pointwise multiplication. This will be our definition of convolution in the simplicial setting. Indeed, for cochains $c,c'\in C^p(K)$ we define their convolution as the cochain
 \begin{equation*}
   c\ast_p c' = \mathcal{F}_p\inv\left(\mathcal{F}_p(c)\cdot\mathcal{F}_p(c')\right),
 \end{equation*}
 where $\cdot$ denotes pointwise multiplication.
 
-Within this framework, we are led to define a \emph{simplicial convolutional layer} as being of the form $c\ast_p\mathcal{L}\inv_p(\varphi_W)$ for some as of yet unspecified $\mathbb{R}^{\lvert K_p \rvert})$ parameterized by learnable weights $W$. To ensure the central property that a convolutional layer be localizing, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
+Within this framework, we are led to define a \emph{simplicial convolutional layer} as being of the form
+\begin{equation*}
+  \mathcal{F}\inv_p(\varphi_W)\ast_p c  
+\end{equation*}
+for some as of yet unspecified $\varphi_W\in\mathbb{R}^{\lvert K_p \rvert}$ parameterized by learnable weights $W$. To ensure the central property that a convolutional layer be localizing, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
 \begin{equation*}
   \varphi_W = \sum_{i=0}^N W_i\Lambda^i = \sum_{i=0}^N W_i(\lambda^i_1, \lambda^i_2, \dotsc, \lambda^i_{\lvert K_p \rvert})
 \end{equation*}
-for small $N$.
+for small $N$. In signal processing parlance, one would say that such a convolutional layer \emph{learns filters that are low-degree polynomials in the frequency domain}.
 
-\begin{itemize}
-\item Implemented using Chebyshev polynomials
-\item Computational cost: good the $p$-Laplacian is localized and sparse.
-\item In Signal processing parlance………
-\item Chebyshev filter………
-\end{itemize}
+The reason for restricting the filters to be these low-degree polynomials (in the frequency domain) is best appreciated when when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then by orthogonality of the eigendecomposition,
+\begin{equation}
+  \mathcal{F}\inv_p(\varphi_W)\ast_p c = \sum_{i=0}^N W_iU\diag(\Lambda^i)U\transpose c = \sum_{i=0}^NW_iL^i_pc. \label{eq:filter}
+\end{equation}
+This is important for two reasons. First, it shows that the layer can be efficiently implemented by $N$ sparse matrix-vector multiplications (or $\mathcal{O}(N^2)$ if the most sparsity is desired). Second, it shows that the operation is $N$-localizing in the following sense. Suppose that $\sigma$ and $\tau$ are $p$-simplices for which $(\nu_0, \nu_1, \dotsc, \nu_{2d-2}, \nu_{2d-1})$ is the shortest sequence with $\nu_0=\sigma$ and $\nu_{2d-1}=\tau$ such that $\nu_{2i+1}\in K_{p\pm 1}$ is a coface or a face of $\nu_{2i}\in K_p$ for each $0\leq i < d$ (we say that $d$ is the \emph{simplicial distance} between $\sigma$ and $\tau$). Then for all $N<d$, the entry of $L_p^N$ corresponding to $\sigma$ and $\tau$ is $0$, and so the filter does not cause interaction between $c(\sigma)$ and $c(\tau)$. This is analogous to a size-$d$ ordinary CNN layer not distributing information between pixels more than $d$ hops apart. We will refer to $N$ as the \emph{degree} of the convolutional layer.
 
-\begin{figure}[htbp]
-  \centering
-
-\includegraphics[width=5cm]{example-image-golden}
-  \caption{Maybe figures SNN} \label{fig:SNN}
-\end{figure}
+In practice we implement \refeq{filter} using Chebyshev polynomials, as suggested for GNNs in~\cite{defferrard2016convolutional}.
