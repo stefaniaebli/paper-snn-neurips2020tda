@@ -1,9 +1,9 @@
 \subsection{Simplicial Complexes}
 A \emph{simplicial complex} is a collection of finite sets closed under taking subsets. We refer to a set in a simplicial complex as a \emph{simplex} of \emph{dimension $p$} if it has cardinality $p+1$. Such a $p$-simplex has $p+1$ \emph{faces} of dimension $p-1$, namely the sets omitting one element, which we will denote as $[v_0,\dotsc,\hat{v}_i,\dotsc, v_p]$ when omitting the $i$'th element. While this definition is entirely combinatorial, there is a geometric interpretation, and it will make sense to refer to and think of $0$-simplices as \emph{vertices}, $1$-simplices as \emph{edges}, $2$-simplices as \emph{triangles}, $3$-simplices as \emph{tetrahedra}, and so forth (see Figure~\ref{fig:data2complex}, (b)). Let $C_p(K)$ be the free real vector space with basis $K_p$, the set of $p$-simplices in 
 a simplicial complex $K$. The elements of $C_p(K)$ are called \emph{$p$-chains}. The 
-$p$-cochain (vector) space $C^p(K)$ is defined as the dual of $C_p(K)$, i.e. $C^p(K)=\hom(K,\RR)$. These vector spaces come equipped with \emph{coboundary maps}, namely linear maps $\delta^p:C^p\to C^{p+1}$ defined by
+$p$-cochain (vector) space $C^p(K)$ is defined as the dual of $C_p(K)$, i.e. $C^p(K)=\hom(K_p,\RR)$. These vector spaces come equipped with \emph{coboundary maps}, namely linear maps $\delta^p:C^p\to C^{p+1}$ defined by
 \begin{equation*}
-\delta^p f([v_0,\dotsc,v_{p+1}]) = \sum_{i=0}^{p+1} (-1)^i f([v_0,\dotsc,\hat{v}_i,\dotsc,v_{p+1}]).
+\delta^p(f)([v_0,\dotsc,v_{p+1}]) = \sum_{i=0}^{p+1} (-1)^i f([v_0,\dotsc,\hat{v}_i,\dotsc,v_{p+1}]).
 \end{equation*}
 \begin{figure}[htpb]
 %\begin{table*}[!t]

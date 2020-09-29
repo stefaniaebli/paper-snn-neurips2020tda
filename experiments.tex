@@ -11,7 +11,7 @@ We evaluate the performance of the SNNs on the task of imputing missing data on 
 \gard{Note for me to remember to add a punchline somewhere in this section :-)}
 
 The results in Figure~\ref{fig:accuracy-error} (a-b) show the MA and MAE of the SNN in inputing missing citations on CC1 (Co-authorship Complex 1, for statistics on the complex see Table~\ref{table:Simplices-coauthor}). Observe that the distribution of the prediction error accumulates close to zeros.
-\begin{table}[htbp]\label{table:Simplices-coauthor}
+\begin{table}[htbp]
   \centering
   \scriptsize{
   \begin{tabular}{llllllllllll}
@@ -25,7 +25,7 @@ The results in Figure~\ref{fig:accuracy-error} (a-b) show the MA and MAE of the 
   \vspace{2pt}
   \caption{%
   Number of simplices in co-authorship complexes from the Semantic Scholar dataset.
-  }
+  } \label{table:Simplices-coauthor}
 \end{table}
 %\begin{figure}[htbp]
 %  \centering
@@ -65,7 +65,6 @@ We compared our results with imputation methods based on statistical techniques,
 
 %\scriptsize{
 \begin{table}[htbp]
-  \label{table:comparison-SNN}
   \centering
   \scriptsize{
   \begin{tabular}{c|cccccc}
@@ -79,5 +78,5 @@ We compared our results with imputation methods based on statistical techniques,
   \end{tabular}}
   \caption{%
  Mean Accuracy $\pm$ standard deviation over 5 samples using statistical methods. \stefania{Add actual values}
-  }
+  }\label{table:comparison-SNN}
 \end{table}%}
