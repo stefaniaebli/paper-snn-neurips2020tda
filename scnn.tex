@@ -23,7 +23,9 @@ Within this framework, we are led to define a \emph{simplicial convolutional lay
 \begin{equation*}
   \varphi_W = \sum_{i=0}^N W_i\Lambda^i = \sum_{i=0}^N W_i(\lambda^i_1, \lambda^i_2, \dotsc, \lambda^i_{\lvert K_p \rvert})
 \end{equation*}
-for small $N$.
+for small $N$. In signal processing parlance, we would say that such a convolutional layer \emph{learns filters that are low-degree polynomials in the frequency domain}.
+
+The reason for restricting the filters to be such low-degree polynomials (in the frequency domain) is best appreciated when when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C_p(K)$. Then
 
 \begin{itemize}
 \item Implemented using Chebyshev polynomials
