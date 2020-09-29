@@ -15,7 +15,7 @@ Recall that for function classes for which it is defined, the ordinary notions o
 \end{equation*}
 where $\cdot$ denotes pointwise multiplication.
 
-Within this framework, we are led to define a \emph{simplicial convolutional layer} as being of the form
+Within this framework, we are led to define a \emph{simplicial convolutional layer} with input $p$-cochain $c$ and weights $W$ as being of the form
 \begin{equation*}
   \mathcal{F}\inv_p(\varphi_W)\ast_p c  
 \end{equation*}
@@ -27,8 +27,8 @@ for small $N$. In signal processing parlance, one would say that such a convolut
 
 The reason for restricting the filters to be these low-degree polynomials (in the frequency domain) is best appreciated when when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then by orthogonality of the eigendecomposition,
 \begin{equation}
-  \mathcal{F}\inv_p(\varphi_W)\ast_p c = \sum_{i=0}^N W_iU\diag(\Lambda^i)U\transpose c = \sum_{i=0}^NW_iL^i_pc. \label{eq:filter}
+  \mathcal{F}\inv_p(\varphi_W)\ast_p c = \sum_{i=0}^N W_iU\diag(\Lambda^i)U\transpose c = \sum_{i=0}^N W_i\left(U\diag(\Lambda)U\transpose\right)^i c = \sum_{i=0}^NW_iL^i_pc. \label{eq:filter}
 \end{equation}
-This is important for two reasons. First, it shows that the layer can be efficiently implemented by $N$ sparse matrix-vector multiplications (or $\mathcal{O}(N^2)$ if the most sparsity is desired). Second, it shows that the operation is $N$-localizing in the following sense. Suppose that $\sigma$ and $\tau$ are $p$-simplices for which $(\nu_0, \nu_1, \dotsc, \nu_{2d-2}, \nu_{2d-1})$ is the shortest sequence with $\nu_0=\sigma$ and $\nu_{2d-1}=\tau$ such that $\nu_{2i+1}\in K_{p\pm 1}$ is a coface or a face of $\nu_{2i}\in K_p$ for each $0\leq i < d$ (we say that $d$ is the \emph{simplicial distance} between $\sigma$ and $\tau$). Then for all $N<d$, the entry of $L_p^N$ corresponding to $\sigma$ and $\tau$ is $0$, and so the filter does not cause interaction between $c(\sigma)$ and $c(\tau)$. This is analogous to a size-$d$ ordinary CNN layer not distributing information between pixels more than $d$ hops apart. We will refer to $N$ as the \emph{degree} of the convolutional layer.
+This is important for two reasons. First, it shows that the layer can be efficiently implemented by $N$ sparse matrix-vector multiplications (or $\mathcal{O}(N^2)$ if the most sparsity is desired). Second, it shows that the operation is $N$-localizing in the following sense. Suppose that $\sigma$ and $\tau$ are $p$-simplices for which $(\nu_0, \nu_1, \dotsc, \nu_{2d-2}, \nu_{2d-1})$ is the shortest sequence with $\nu_0=\sigma$ and $\nu_{2d-1}=\tau$ such that $\nu_{2i+1}\in K_{p\pm 1}$ is a coface or a face of $\nu_{2i}\in K_p$ for each $0\leq i < d$ (we say that $d$ is the \emph{simplicial distance} between $\sigma$ and $\tau$). Then for all $N<d$, the entry of $L_p^N$ corresponding to $\sigma$ and $\tau$ is $0$, and so the filter does not cause interaction between $c(\sigma)$ and $c(\tau)$. This is analogous to a size-$d$ ordinary CNN layer not distributing information between pixels more than $d$ hops apart. We will refer to $N$ as the \emph{degree} of the convolutional layer, but one may well wish to keep in mind the notion of \emph{size} from traditional CNNs.
 
 In practice we implement \refeq{filter} using Chebyshev polynomials, as suggested for GNNs in~\cite{defferrard2016convolutional}.
