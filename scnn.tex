@@ -19,7 +19,7 @@ where the right hand side denotes pointwise multiplication. This will be our def
 \end{equation*}
 where $\cdot$ denotes pointwise multiplication.
 
-Within this framework, we are led to define a \emph{simplicial convolutional layer} as being of the form $c\ast_p\mathcal{L}\inv_p(\varphi_W)$ for some as of yet unspecified $\mathbb{R}^{\lvert K_p \rvert})$ parameterized by learnable weights $W$. To ensure the central property that a convolutional layer be localizing, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
+Within this framework, we are led to define a \emph{simplicial convolutional layer} as being of the form $c\ast_p\mathcal{L}\inv_p(\varphi_W)$ for some as of yet unspecified $\mathbb{R}^{\lvert K_p \rvert}$ parameterized by learnable weights $W$. To ensure the central property that a convolutional layer be localizing, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
 \begin{equation*}
   \varphi_W = \sum_{i=0}^N W_i\Lambda^i = \sum_{i=0}^N W_i(\lambda^i_1, \lambda^i_2, \dotsc, \lambda^i_{\lvert K_p \rvert})
 \end{equation*}
