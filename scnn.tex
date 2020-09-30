@@ -7,7 +7,7 @@ Motivated by the fact that the discrete Fourier transform of real-valued functio
   &\mathcal{F}_p: C^p(K) \to \mathbb{R}^{\lvert K_p \rvert} \\
   &\mathcal{F}_p(c) = \left(\ip{c}{e_1}_p, \ip{c}{e_2}_p, \dotsc, \ip{c}{e_{\lvert K_p \rvert}}_p\right),
 \end{align*}
-where the $e_i$'s are the eigencochains of $\mathcal{L}_p$ ordered ascendingly by eigenvalues (which we label $\lambda_1\leq\dotsm\leq\lambda_{\lvert K_p \rvert}$). $\mathcal{F}_p$ is invertible since $\mathcal{L}_p$ is diagonalizable.
+where the $e_i$'s are the eigencochains of $\mathcal{L}_p$ ordered ascendingly by eigenvalues (which we label $\lambda_1\leq\dotsm\leq\lambda_{\lvert K_p \rvert}$). $\mathcal{F}_p$ is invertible since $\mathcal{L}_p$ is diagonalizable; explicitly, we write $U\diag(\Lambda)U\transpose$ for a normalized eigendecomposition, in which case the orthonormal matrices $U$ and $U\transpose$ represent $\mathcal{F}\inv_p$ and $\mathcal{F}_p$, respectively.
 
 Recall that for function classes for which it is defined, the ordinary notions of Fourier transform obey $\mathcal{F}(f\ast g)=\mathcal{F}(f)\mathcal{F}(g)$, where the right hand side denotes pointwise multiplication. This will be our definition of convolution in the simplicial setting. Indeed, for cochains $c,c'\in C^p(K)$ we define their convolution as the cochain
 \begin{equation*}
@@ -25,7 +25,7 @@ for some as of yet unspecified $\varphi_W\in\mathbb{R}^{\lvert K_p \rvert}$ para
 \end{equation*}
 for small $N$. In signal processing parlance, one would say that such a convolutional layer \emph{learns filters that are low-degree polynomials in the frequency domain}.
 
-The reason for restricting the filters to be these low-degree polynomials (in the frequency domain) is best appreciated when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then by orthogonality of the eigendecomposition,
+The reason for restricting the filters to be these low-degree polynomials (in the frequency domain) is best appreciated when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then
 \begin{equation}
   \mathcal{F}\inv_p(\varphi_W)\ast_p c = \sum_{i=0}^N W_iU\diag(\Lambda^i)U\transpose c = \sum_{i=0}^N W_i\left(U\diag(\Lambda)U\transpose\right)^i c = \sum_{i=0}^NW_iL^i_pc. \label{eq:filter}
 \end{equation}
@@ -34,3 +34,5 @@ This is important for two reasons. First, it shows that the layer can be efficie
 In practice we implement \refeq{filter} using Chebyshev polynomials, as suggested for GNNs in~\cite{defferrard2016convolutional}.
 
 \stefania{Kathryn: What do you think about writing since the beginning all the operation using $U$? Guillaume was suggetsing that it might be easier to read in that way. However as it is written now I think it is more elegant.   }
+
+\gard{Re Stefania's comment above: I understand the point, but I don't think it becomes easier to read. It becomes more like Barbarossa's and other EE papers, perhaps, but that just mires the reader in keeping track of seemingly arbitrary bases (beyond the arbitrary ordering of eigencochains). With the above formulation, one can trace a path all the way back to the most basic notion of a CNN if one interprets the first appearance of ``$f\ast \varphi_W$'' the right way. I really think that that way of understanding even the classical CNNs is the best chance one has to make them less ad-hoc and more generalizable. While I don't know if there are practical implications of this, it does keep an open road directly to ``deep learning over locally compact groups'', for example. As far as I know, people haven't gone there yet, but it doesn't seem right not to leave the door open (not that we discovered the door --- the door is obvious.)}
