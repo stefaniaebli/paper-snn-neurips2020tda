@@ -1,13 +1,28 @@
 \section{Experimental results}
-Many real world datasets contain missing values, often encoded as blanks, NaNs or other placeholders. Missing data imputation (MDI) has therefore long been a popular problem to tackle in statistics and machine learning~\cite{little1986statistical, nelwamondo2007missing}, and recently GNNs have proved to be a powerful tool~\cite{spinelli2020neural} for this task. With a view that our method incorporates additional higher-dimensional structure in the data, we evaluate the performance of the SNNs in imputing missing data over simplicial complexes.
 
-%\subsection{Dataset description}
-\textbf{Dataset description.} The datasets we analyzed are extracted from the Semantic Scholar Open Research Corpus~\cite{ammar18NAACL}. The data contains over $39$ million published research papers together with their authors and numbers of citations. We retained only papers with more than $5$ citations and at most $10$ authors. As is common in TDA, we preprocess our data by constructing a simplicial complex. Our work focuses on \emph{co-authorship complexes}~\cite{patania2017}, simplicial complexes where a paper with $k$ authors is represented by a $(k-1)$-simplex. We constructed different co-authorship complexes by considering subsamples of the Semantic Scholar dataset. The subsamples were obtained by performing random walks (of length $80$) on the nodes of the graph the vertices of which correspond to papers, and edges connect papers sharing at least one author. We believe this extracts representative data from the dataset. The co-authorship complexes obtained from each subsampling have corresponding $k$-cochains given by the number of shared citations of the given collaboration (see Figure~\ref{fig:data2complex}).
+%\paragraph{Task/Problem.}
+As many real-world datasets contain missing values, missing data imputation (MDI) has been a popular problem to tackle in statistics and machine learning~\cite{little1986statistical, nelwamondo2007missing}.
+GNNs have recently proved to be a powerful tool for this task~\cite{spinelli2020neural}.
+With a view that our method incorporates additional higher-dimensional structure in the data, we evaluate the performance of the SNNs in imputing missing data over simplicial complexes.
+\mdeff{Could still be better and shorter, but couldn't find how yet.}
 
-\textbf{Method.} We evaluated the performance of the SNNs on the task of imputing missing data on the $k$-cochains (for $k=0,1,2$) of the extracted co-authorship complexes. As in a typical pipeline for this task~\cite{nelwamondo2007missing}, missing data is artificially introduced by replacing a portion of the values with a constant. Specifically, given a fixed co-authorship complex, missing data is introduced at random on the $k$-cochains at $4$ rates: $10\%,  20\%,  30\%$, and $50\%$. The training input is then given by the $k$-cochains on which the random missing data is substituted by the median of the known data (the median is perhaps a reasonable first guess for estimating missing data). We trained an SNN comprising $3$ layers with $30$ convolutional filters of degree $5$. We used the $L_1$ norm as reconstruction loss over the known elements, and the Adam optimizer with a learning rate of $10^{-3}$. The SNN was trained for $1000$ iterations. We then tested the performance of the network on its accuracy in imputing missing data. As a statistical evaluation, we tested the network on different random samples of the damaged portions for the same percentage of missing value.
+\paragraph{Data.}
+A \emph{co-authorship complex}~\cite{patania2017} is a simplicial complex where a paper with $k$ authors is represented by a $(k-1)$-simplex.
+\mdeff{Projection of the paper-author bipartite graph? Discuss why not hypergraphs? Not sure.}
+By subset closure, vertices represent authors.
+We sampled two co-authorship complexes---CC1 and CC2, see Table~\ref{table:Simplices-coauthor} for statistics---from the Semantic Scholar Open Research Corpus~\cite{ammar18NAACL}, a dataset of over $39$ million research papers with authors and citations.\footnote{Papers with less than $5$ citations and more than $10$ authors were excluded.}
+\mdeff{I have a repo with the code to create this dataset. Shall we make it public and link it here?}
+We believe the following procedure extracts representative complexes: We performed random walks (of length $80$) on the vertices of the graph which correspond to papers, and edges connect papers sharing at least one author. \mdeff{Needs clarification.}
+The $k$-cochains are given by the number of shared citations of the given collaboration (see Figure~\ref{fig:data2complex}).
+\mdeff{Could be more precise. Though the figure is great and very helpful.}
 
-%\subsection{Results}
-\textbf{Results.} \gard{Note for me to remember to add a punchline somewhere in this section :-)} The results in Figure~\ref{fig:accuracy-error} (a-b) show the mean accuracy (MA) and mean absolute error distribution (MAED) \stefania{change we do not take average histogram}(see Section~\ref{sec:supp_material} for definitions) of the SNN in inputing missing citations on CC1 (Co-authorship Complex 1, for statistics on the complex see Table~\ref{table:Simplices-coauthor}, Section~\ref{sec:supp_material}). Observe that the distribution of the prediction error accumulates close to zero.
+\paragraph{Method.}
+We evaluated the performance of the SNNs on the task of imputing missing data on the $k$-cochains (for $k=0,1,2$) of the extracted co-authorship complexes. As in a typical pipeline for this task~\cite{nelwamondo2007missing}, missing data is artificially introduced by replacing a portion of the values with a constant. Specifically, given a fixed co-authorship complex, missing data is introduced at random on the $k$-cochains at $4$ rates: $10\%,  20\%,  30\%$, and $50\%$. The training input is then given by the $k$-cochains on which the random missing data is substituted by the median of the known data (the median is perhaps a reasonable first guess for estimating missing data). We trained an SNN comprising $3$ layers with $30$ convolutional filters of degree $N=5$. We used the $L_1$ norm as the reconstruction loss over the known elements, and the Adam optimizer with a learning rate of $10^{-3}$. The SNN was trained for $1000$ iterations. We then tested the performance of the network on its accuracy in imputing missing data. As a statistical evaluation, we tested the network on different random samples of the damaged portions for the same percentage of missing value.
+
+\paragraph{Results.}
+\gard{Note for me to remember to add a punchline somewhere in this section :-)}
+Figure~\ref{fig:accuracy-error} (a-b) shows the mean accuracy (MA) and mean absolute error distribution (MAED) \stefania{change we do not take average histogram} (see Section~\ref{sec:supp_material} for definitions) of the SNN in inputing missing citations on CC1. Observe that the distribution of the prediction error accumulates close to zero.
+
 %\begin{figure}[htbp]
 %  \centering
 %\includegraphics[scale=0.35]{./figures/distribution_cohain_150250.png}
@@ -33,24 +48,32 @@ Many real world datasets contain missing values, often encoded as blanks, NaNs o
    \includegraphics[scale=0.36]{./figures/Error_dist_start150250_seed6666_notsee40.png}
  % \caption{Distribution of the prediction's error} \label{fig:error}
 \end{subfigure}
-\caption{(a) Mean Accuracy $\pm$ std over 5 samples of SNN in imputing missing citations on CC1. (b)Mean Absolute Error $\pm$ std over 5 samples of SNN for $40\%$ missing values in CC1. \stefania{Add error on bins}}
+\caption{(a) Mean Accuracy $\pm$ std over 5 samples of SNN in imputing missing citations on CC1. (b) Mean Absolute Error $\pm$ std over 5 samples of SNN for $40\%$ missing values in CC1. \stefania{Add error on bins.} \mdeff{I don't get (b).} \mdeff{Some space could be claimed from this figure.}}
 \label{fig:accuracy-error}
 \end{figure}
 
-As a second assessment for our network, we evaluate how accurately an SNN pretrained on one co-authorship complex can impute missing citations on a different complex. Motivated by over the assumption that co-authorship complexes share a similar structure. In Figure~\ref{fig:transfer-learning} we show the MA in predicting missing citations on CC1 using the above architecture of SNN trained on CC2 (Co-authorship Complex 2, see Table~\ref{table:Simplices-coauthor}, Section~\ref{sec:supp_material}).
-We compared our results with imputation methods based on statistical techniques, namely replacing missing data with the median or mean of the known data and inferring the missing values from the $(k-1)$ and $(k+1)$ neighbors of the simplices ($k$-simplicial neighbor $k$-sn). As Table~\ref{table:comparison-SNN} shows, SNNs outperform these statistical techniques. Comparison with other state-of-the-art imputation algorithms is left for future work.
+As a second assessment, we evaluate how accurately an SNN trained on one co-authorship complex can impute missing citations on a different complex.
+Motivated by over the assumption that co-authorship complexes share a similar structure. \mdeff{Structure isn't enough: same data generating process?}
+Figure~\ref{fig:transfer-learning} shows the MA in predicting missing citations on CC1 using the above architecture of SNN trained on CC2.
+\mdeff{Conclusion? Trained SNN transfer because not much MA is lost, or the hypothesis is satisfied?}
+
+Table~\ref{table:comparison-SNN} shows the performance of three statistical baselines: missing values inferred as the mean or median of all known values, and missing values inferred from the $(k-1)$ and $(k+1)$ neighbors of the simplices ($k$-simplicial neighbor $k$-sn).
+\mdeff{Mean or median of the neighbors?}
+SNNs well outperform these baselines.
+Comparison with other state-of-the-art imputation algorithms is left for future work.
+
 \begin{figure}[htbp]
   \centering
 \includegraphics[scale=0.35]{./figures/accuracy_network1_pretrained.png}
-  \caption{ Mean Accuracy $\pm$ std over 5 samples in imputing missing citations on CC1 of SNN trained on CC2 . } \label{fig:transfer-learning}
+  \caption{Mean Accuracy $\pm$ std over 5 samples in imputing missing citations on CC1 with an SNN trained on CC2.} \label{fig:transfer-learning}
 \end{figure}
 
 %\scriptsize{
 \begin{table}[htbp]
   \centering
   \scriptsize{
-  \begin{tabular}{c|cccccc}
-    \cmidrule(r){1-7}
+  \begin{tabular}{lcccccc}
+    \toprule
     Method   & CC1 - dim 0   & CC1 - dim 1   & CC1 - dim 2   & CC2 - dim 0  & CC2 - dim 1  & CC2 - dim 2 \\
     \midrule
     Mean & $3.3 \pm 0.82$ & $5.75\pm 1.28$  &$ 2.96\pm 0.49$  & $3.32 \pm 0.85$ & $8.31 \pm 1.03$  & $7.90\pm 0.35$\\
@@ -60,6 +83,7 @@ We compared our results with imputation methods based on statistical techniques,
   \end{tabular}}
    \vspace{2pt}
   \caption{%
- Mean Accuracy $\pm$ standard deviation for $30\%$ of missing data over 5 samples. \stefania{Add uniform distribution sampling instead of mean?}
+      Performance of statistical baselines: Mean Accuracy $\pm$ standard deviation for $30\%$ of missing data over 5 samples. \stefania{Add uniform distribution sampling instead of mean?}
+ \mdeff{Align on period and $\pm$.}
   }\label{table:comparison-SNN}
 \end{table}%}

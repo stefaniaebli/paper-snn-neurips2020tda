@@ -100,6 +100,23 @@
 \input{common.tex}
 \begin{document}
 
+\section*{TODOs and discussion}
+General:
+\begin{enumerate}
+    \item \mdeff{I would define the convolution as a linear map that is a parameterized function of the Laplace--de Rham, i.e., $\varphi_W(\mathcal{L}) f$. That will (i) save space by staying basis-independent and avoiding the Fourier and eigencochain discussion (we can note that the basis that diagonalizes the operator is Fourier, but it shouldn't be central) and (ii) avoid the problematic definition we have now (i.e., that one cannot meaningfully convolve two cochains without a symmetry group). That way, the implementation of the functional as a truncated polynomial appears naturally, and we can list its nice properties: $O(n)$ computational cost, $O(1)$ learning complexity, and $N$-locality.}
+    \item \mdeff{The saved space should be used to write more about the (co)boundary, and the dual (co)differential. The duality of taking the border or the derivative should be intuitive to anyone. Also add $B_0$ and/or $B_1$ to Figure 1. (If space allows, we could link to div/grad/curl for more intuition.)}
+    \item \mdeff{Use it to explain how we link cochains of different degree. Maybe add a diagram of the SNN. (BTW we might want to consider the antiderivative $B^+$ instead of the codifferential $B\transpose$ to go down.)}
+\end{enumerate}
+Minor:
+\begin{itemize}
+    \item \mdeff{Can we have the figures in vector graphics (e.g., PDF) rather than PNG?}
+    \item \mdeff{I've done it here and there, but still more space can be saved by tightening the writing.}
+    \item \mdeff{Shall we use such a generic title? We may want to write a more comprehensive paper in the future.}
+    \item \mdeff{There's a mix of Title Case and sentence case in section or paragraph headers. We should stick to one.}
+    \item \mdeff{Check for consistent terminology, e.g., node vs vertex.}
+\end{itemize}
+\clearpage
+
 \maketitle
 
 \input{abstract.tex}

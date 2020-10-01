@@ -1,5 +1,9 @@
-%\subsection{Simplicial Complexes}
-\textbf{Simplicial Complexes.} A \emph{simplicial complex} is a collection of finite sets closed under taking subsets. We call a member of a simplicial complex $K$ a \emph{simplex} of \emph{dimension $p$} if it has cardinality $p+1$, and denote the set of all such $K_p$. A $p$-simplex has $p+1$ \emph{faces} of dimension $p-1$, namely the subsets omitting one element. We denote these $[v_0,\dotsc,\hat{v}_i,\dotsc, v_p]$ when omitting the $i$'th element. If a simplex $\sigma$ is a face of $\tau$, we say that $\tau$ is a \emph{coface} is $\sigma$. While this definition is entirely combinatorial, there is a geometric interpretation, and it will make sense to refer to and think of $0$-simplices as \emph{vertices}, $1$-simplices as \emph{edges}, $2$-simplices as \emph{triangles}, $3$-simplices as \emph{tetrahedra}, and so forth (see Figure~\ref{fig:data2complex}, (b)).
+\paragraph{Simplicial Complexes.}
+A \emph{simplicial complex} is a collection of finite sets closed under taking subsets.
+We call a member of a simplicial complex $K$ a \emph{simplex} of \emph{dimension $p$} if it has cardinality $p+1$, and denote the set of all such $p$-simplices $K_p$.
+A $p$-simplex has $p+1$ \emph{faces} of dimension $p-1$, namely the subsets omitting one element. We denote these $[v_0,\dotsc,\hat{v}_i,\dotsc, v_p]$ when omitting the $i$'th element.
+If a simplex $\sigma$ is a face of $\tau$, we say that $\tau$ is a \emph{coface} of $\sigma$ \mdeff{Only define what is used.}.
+While this definition is entirely combinatorial, there is a geometric interpretation, and it will make sense to refer to and think of $0$-simplices as \emph{vertices}, $1$-simplices as \emph{edges}, $2$-simplices as \emph{triangles}, $3$-simplices as \emph{tetrahedra}, and so forth (see Figure~\ref{fig:data2complex}, (b)).
 
 Let $C^p(K)$ be the set of functions $K_p\to\RR$, with the obvious vector space structure. These \emph{$p$-cochains} will encode our data. Define the linear \emph{coboundary} maps $\delta^p:C^p(K)\to C^{p+1}(K)$ by
 \begin{equation*}
@@ -10,14 +14,14 @@ Let $C^p(K)$ be the set of functions $K_p\to\RR$, with the obvious vector space 
 %\begin{table*}[!t]
 \savebox{\tempbox}{% compute size of tabulat
 \scriptsize{
-\begin{tabular}{llll}
-    \cmidrule(r){1-3}
-    Papers   & Authors     & Citations  \\
+\begin{tabular}{llr}
+    \toprule
+    Papers & Authors & Citations \\
     \midrule
     Paper I & A, B, C  & 100  \\
-    Paper II &  A, B & 50\\ 
-    Paper III & A, D & 10\\ 
-    Paper IV & C, D & 4\\ 
+    Paper II &  A, B & 50\\
+    Paper III & A, D & 10\\
+    Paper IV & C, D & 4\\
     \bottomrule
   \end{tabular}
 }}%
@@ -54,16 +58,23 @@ Let $C^p(K)$ be the set of functions $K_p\to\RR$, with the obvious vector space 
 \scriptsize{\captionof*{figure}{(c)}}%
 \end{minipage}%
 %\end{table*}
-\caption{Example of co-authorship complex and its $1$-Laplacian. (a) Data. (b) Co-authorship complex with corresponding cochains build from the data. (c) $1$-Laplacian associated to the co-authorship complex. }\label{fig:data2complex}
+\caption{Constructing a simplicial complex from data. (a) Co-authorship data. (b) Co-authorship complex with corresponding cochains built from the data. (c) $1$-Laplacian of the co-authorship complex.}\label{fig:data2complex}
 \end{figure}
 
-%\subsection{Simplicial Laplacians}
-\textbf{Simplicial Laplacians.} We are in this paper concerned with finite abstract simplicial complexes, although our method is applicable to a much broader setting, such as for example finite CW-complexes. %\gard{I kinda liked the point that emphasized that the simplicial complexes don't need an embedding, but maybe there isn't space for it?}
+\paragraph{Simplicial Laplacians.}
+We are in this paper concerned with finite abstract simplicial complexes, although our method is applicable to a much broader setting, such as for example finite CW-complexes. %\gard{I kinda liked the point that emphasized that the simplicial complexes don't need an embedding, but maybe there isn't space for it?}
 %In particular, it is not necessary for the simplicial complexes to come equipped with some embedding into Euclidean spaces, nor do we demand that they triangulate a Riemannian manifold.
 In analogy with Hodge--de Rham theory~\cite{madsen1997calculus}, we then define the \emph{degree-$i$ simplicial Laplacian} of a simplicial complex $K$ as the linear map $\lap_i:C^i(K)\to C^i(K)$ specified by
 \begin{equation*}
   \lap_i = \lapu_i + \lapd_i = \delta^{{i}^{\ast}}\circ\delta^{i} + \delta^{i-1}\circ\delta^{{i-1}^{\ast}},
 \end{equation*}
 
-where $\delta^{{i}^{\ast}}$ is the adjoint of the coboundary with respect to the inner product (for example the one making the indicator function basis orthonormal). In the case $i=0$, $\mathcal{L}_0$ is the classical graph Laplacian. In most practical applications, the coboundary can be represented as a sparse matrix $B_i$ and the Laplacians can be efficiently computed as $L_i=B_i^T B_{i}+B_{i-1}B_{i-1}^T$. \stefania{Still thinking about moving this to the appendix} Since the Laplacians encode information about the adjacency of the simplices, they can be interpreted as a message passing functions~\cite{gilmer2017NeuralMP}. Additionally, they carry valuable topological information about the simplicial complex. In particular, the kernel of the $k$-Laplacian is isomorphic to the $k$-(co)homology of its associated simplicial complex~\cite{eckmann1944,horak2013spectra}.
+where $\delta^{{i}^{\ast}}$ is the adjoint of the coboundary with respect to the inner product (for example the one making the indicator function basis orthonormal).
+In most practical applications, the coboundary can be represented as a sparse matrix $B_i$ and the Laplacians can be efficiently computed as $L_i=B_i\transpose B_{i}+B_{i-1}B_{i-1}\transpose$. \stefania{Still thinking about moving this to the appendix}
+\mdeff{I think it's important to show how easy is the abstract description to actually implement. Maybe as a paragraph with $B$ and $L$ in a basis? Needed for Figure 1 anyhow.}
+$B_0$ and $\mathcal{L}_0$ are the classic graph incidence matrix and Laplacian.
+Since the Laplacians encode information about the adjacency of the simplices, they can be interpreted as a message passing functions~\cite{gilmer2017NeuralMP}.
+\mdeff{Should go to conv.}
+Additionally, they carry valuable topological information about the simplicial complex. In particular, the kernel of the $k$-Laplacian is isomorphic to the $k$-(co)homology of its associated simplicial complex~\cite{eckmann1944,horak2013spectra}.
 % In other words, the number of zero-eigenvalues tells us the number of $k$-dimensional holes~\cite{horak2013spectra}.
+\mdeff{The commented sentence would be useful to non-topologists. Maybe a footnote?}
