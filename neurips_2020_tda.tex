@@ -45,7 +45,9 @@
 \usepackage{mwe}
 \usepackage{blkarray}
 
-
+\usepackage{dcolumn,booktabs}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\newcommand\mc[1]{\multicolumn{1}{c}{#1}} % handy shortcut macro
 
 \newsavebox{\tempbox}
 \newlength{\tempwidth}
