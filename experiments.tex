@@ -54,9 +54,7 @@ As a second assessment, we evaluate how accurately an SNN trained on one co-auth
 Figure~\ref{fig:transfer-learning} shows the MA in predicting missing citations on CC1 using the above architecture of SNN trained on CC2.
 \mdeff{Conclusion? Trained SNN transfer because not much MA is lost, or the hypothesis is satisfied?}\stefania{I think the SNN transfer because of the similarity of the complexes (and therefore Laplacians), I can write down this as an hypothesis but it needs to be further investigated (ie are the kernels of the laplacians similar?are the homologies of the complexes the same?..)}
 
-Table~\ref{table:comparison-SNN} shows the performance of three statistical baselines: missing values inferred as the mean or median of all known values, and missing values inferred from the $(k-1)$ and $(k+1)$ neighbors of the simplices ($k$-simplicial neighbor $k$-sn).
-\mdeff{Mean or median of the neighbors?}
-SNNs well outperform these baselines.
+Table~\ref{table:comparison-SNN} shows the performance of three statistical baselines: missing values inferred as the mean or median of all known values, and missing values inferred from the mean of $(k-1)$ and $(k+1)$ neighbors of the simplices ($k$-simplicial neighbor $k$-sn). SNNs well outperform these baselines.
 Comparison with other state-of-the-art imputation algorithms is left for future work.
 
 \begin{figure}[htbp]
@@ -81,6 +79,29 @@ Comparison with other state-of-the-art imputation algorithms is left for future 
    \vspace{2pt}
   \caption{%
       Performance of statistical baselines: Mean Accuracy $\pm$ standard deviation for $30\%$ of missing data over 5 samples. \stefania{Add uniform distribution sampling instead of mean?}
- \mdeff{Align on period and $\pm$.}
+ \mdeff{Align on period and $\pm$.}\stefania{@Gard @Michael, do you know how to do this in a simple way?}
   }\label{table:comparison-SNN}
 \end{table}%}
+\begin{figure}[tb]
+\centering
+ \begin{subfigure}[t]{-0.8\textwidth}
+ \vspace{-4cm}
+    \text{(a)}
+  \end{subfigure}
+\begin{subfigure}[t]{0.8\textwidth}
+\centering
+   \includegraphics[scale=0.35]{./figures/accuracy_network1.png}
+ %\caption{Accuracy of SNN in predicting missing citations } \label{fig:accuracy}
+\end{subfigure}
+ \begin{subfigure}[t]{0.8\textwidth}
+    \text{(b)}
+  \end{subfigure}
+\begin{subfigure}[t]{0.8\textwidth}
+\centering
+\vspace{-0.5cm}
+   \includegraphics[scale=0.36]{./figures/Error_dist_start150250_seed6666_notsee40.png}
+ % \caption{Distribution of the prediction's error} \label{fig:error}
+\end{subfigure}
+\caption{(a) Mean Accuracy $\pm$ std over 5 samples of SNN in imputing missing citations on CC1. (b) Distribution of the Absolute Error of the SNN for $40\%$ missing values in CC1.  \mdeff{I don't get (b).}\stefania{There was some text there that should have been removed. It is the distribution of the absolute error of the SNN for 1 sample when $40\%$ of the data is missing. Is it clear like this?} \mdeff{Some space could be claimed from this figure.}\stefania{Yep. With Grad we were thinking the same :)}}
+\label{fig:accuracy-error}
+\end{figure}
