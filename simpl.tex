@@ -70,11 +70,10 @@ In analogy with Hodge--de Rham theory~\cite{madsen1997calculus}, we then define 
 \end{equation*}
 
 where $\delta^{{i}^{\ast}}$ is the adjoint of the coboundary with respect to the inner product (for example the one making the indicator function basis orthonormal).
-In most practical applications, the coboundary can be represented as a sparse matrix $B_i$ and the Laplacians can be efficiently computed as $L_i=B_i\transpose B_{i}+B_{i-1}B_{i-1}\transpose$. \stefania{Still thinking about moving this to the appendix}
-\mdeff{I think it's important to show how easy is the abstract description to actually implement. Maybe as a paragraph with $B$ and $L$ in a basis? Needed for Figure 1 anyhow.}\stefania{Oh yes, I totally agree with what you say. My comment above was not referring to the laplacians written with $B$ but to the following paragraph in which we describe its topological properties. I think it is important to say why the Laplacian encodes topological properties but if it was taking to much space I was thinking about moving it in the appendix..I think we can leave it here and see later..}
-$B_0$ and $\mathcal{L}_0$ are the classic graph incidence matrix and Laplacian.
+In most practical applications, the coboundary can be represented as a sparse matrix $B_i$ and the Laplacians can be efficiently computed as $L_i=B_i\transpose B_{i}+B_{i-1}B_{i-1}\transpose$. %\stefania{Still thinking about moving this to the appendix}
+%\mdeff{I think it's important to show how easy is the abstract description to actually implement. Maybe as a paragraph with $B$ and $L$ in a basis? Needed for Figure 1 anyhow.}\stefania{Oh yes, I totally agree with what you say. My comment above was not referring to the laplacians written with $B$ but to the following paragraph in which we describe its topological properties. I think it is important to say why the Laplacian encodes topological properties but if it was taking to much space I was thinking about moving it in the appendix..I think we can leave it here and see later..}
+The matrices $B_0$ and $L_0$ are the classic graph incidence matrix and Laplacian.
 Since the Laplacians encode information about the adjacency of the simplices, they can be interpreted as a message passing functions~\cite{gilmer2017NeuralMP}.
 \mdeff{Should go to conv.}\stefania{You mean in the simplicial convolution section?In this case, yes.}
 Additionally, they carry valuable topological information about the simplicial complex. In particular, the kernel of the $k$-Laplacian is isomorphic to the $k$-(co)homology of its associated simplicial complex~\cite{eckmann1944,horak2013spectra}.
 \footnote{In other words, the number of zero-eigenvalues tells us the number of $k$-dimensional holes~\cite{horak2013spectra}.}
-\mdeff{The commented sentence would be useful to non-topologists. Maybe a footnote?}\stefania{Yes, I added one.}
