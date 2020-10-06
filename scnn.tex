@@ -1,8 +1,5 @@
 \paragraph{Simplicial convolution.}
-\mdeff{No motivation here: That goes in the intro.}
-A convolutional layer is a linear transformation of the form $f\ast \varphi_W$, where $\ast$ denotes convolution, and $\varphi_W$ is a function
-\emph{with small support} parameterized by some learnable weights $W$.
-Typically, $\varphi_W$ is just locally constant in a small spatial region, and is zero elsewhere. While this seems like an overly complicated way to phrase an idea that is nearly trivial for discrete data on a regular rectangular domain, it does lend itself to a spectral interpretation that we exploit to extend CNNs in a much more general setting, as was originally done for graph CNNs.
+A convolutional layer is a linear transformation of the form $f\ast \varphi_W$, where $\ast$ denotes convolution, and $\varphi_W$ is a function \emph{with small support} parameterized by some learnable weights $W$. Typically, $\varphi_W$ is just locally constant in a small spatial region, and is zero elsewhere. While this seems like an overly complicated way to phrase an idea that is nearly trivial for discrete data on a regular rectangular domain, it does lend itself to a spectral interpretation that we exploit to extend CNNs in a much more general setting, as was originally done for graph CNNs.
 
 Motivated by the fact that the discrete Fourier transform of a real-valued function on an $n$-dimensional cubical grid coincides with its decomposition into a linear combination of the eigenfunctions of the graph Laplacian for that grid, we define the Fourier transform of real $p$-cochains on a simplicial complex with Laplacians $\mathcal{L}_p$ as the map $\mathcal{F}_p: C^p(K) \to \mathbb{R}^{\lvert K_p \rvert}$ given by
 \begin{equation*}
