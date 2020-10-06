@@ -4,7 +4,7 @@
 Suppose that $\sigma$ and $\tau$ are $p$-simplices for which $(\nu_0, \nu_1, \dotsc, \nu_d)$ is the shortest sequence of $p$-simplices with the property that $\nu_0=\sigma$, $\nu_d=\tau$, and each $\nu_i$ shares a face or a coface with $\nu_{i-1}$, and a face or a coface with $\nu_{i+1}$. We say that $d$ is the \emph{simplicial distance} between $\sigma$ and $\tau$. Then for all $N<d$, the entry of $L_p^N$ corresponding to $\sigma$ and $\tau$ is $0$, and so the filter does not cause interaction between $c(\sigma)$ and $c(\tau)$. This is analogous to a size-$d$ ordinary CNN layer not distributing information between pixels that are more than $d$ pixels apart. We will refer to $N$ as the \emph{degree} of the convolutional layer, but one may well wish to keep in mind the notion of \emph{size} from traditional CNNs.
 
 \paragraph{Coauthorship complexes.}
-Given a set of papers with their respective authors, a coauthorships complex is built by adding a $(k-1)$-simplex for each paper with $k$ authors. Differently from hypergraphs, simplicial complexes are closed under subsets. This means that when one adds a $(k-1)$-simplex all its subsimplices are included. The added subsimplices represent collaborations among subgroups of the authors in writing the same paper. For this reason simplicial complexes seem the natural mathematical framework to encode $n$-fold interactions. In a more general setting, a simplicial complex representing $n$-fold interactions can be constructed as the one-mode projection of a bipartite graph. Namely, given a bipartite graph $X$-$Y$, the simplicial projection on $Y$ is the simplicial complex whose $(k-1)$-simplices are sets of $k$ neighboring vertices in $Y$. For example, our co-authorships complexes are constructed as simplicial projections of the paper-author bipartite graph (see Figure~\ref{fig:bipartite}). In this setting, cochains on the simplicial projection come naturally from weights on $X$. Specifically, given any $(k-1)$-simplex $[y_1,\dots,y_k]$ and its neighbor vertices $\{x_1,\dots,x_j\}\subseteq X$ one can define a $k$-cochain as $\phi(\{x_1,\dots,x_j\})$, for any function $\phi: \mathcal{P(X)}\longrightarrow \RR $. In our case, the function is the sum and the wights are given by the number of citations (see Figure~\ref{fig:bipartite}).
+Given a set of papers with their respective authors, a coauthorships complex is built by adding a $(k-1)$-simplex for each paper with $k$ authors. Differently from hypergraphs, simplicial complexes are closed under subsets. This means that when one adds a $(k-1)$-simplex all its subsimplices are included. The added subsimplices represent collaborations among subgroups of the authors in writing the same paper. For this reason simplicial complexes seem the natural mathematical framework to encode $n$-fold interactions. In a more general setting, a simplicial complex representing $n$-fold interactions can be constructed as the one-mode projection of a bipartite graph. Namely, given a bipartite graph $X$-$Y$, the simplicial projection on $Y$ is the simplicial complex whose $(k-1)$-simplices are sets of $k$ neighboring vertices in $Y$. For example, our coauthorships complexes are constructed as simplicial projections of the paper-author bipartite graph (see Figure~\ref{fig:bipartite}). In this setting, cochains on the simplicial projection come naturally from weights on $X$. Specifically, given any $(k-1)$-simplex $[y_1,\dots,y_k]$ and its neighbor vertices $\{x_1,\dots,x_j\}\subseteq X$ one can define a $k$-cochain as $\phi(\{x_1,\dots,x_j\})$, for any function $\phi: \mathcal{P(X)}\longrightarrow \RR $. In our case, the function is the sum and the wights are given by the number of citations (see Figure~\ref{fig:bipartite}).
 
 \begin{figure}[htpb]
 %\begin{table*}[!t]
@@ -30,12 +30,12 @@ Given a set of papers with their respective authors, a coauthorships complex is 
 \scriptsize{\captionof*{figure}{(c)}}%
 \end{minipage}%
 %\end{table*}
-\caption{Constructing a simplicial complex and its cochain from a bipartite graph. (a) Paper-author bipartite graph using the data of Figure~\ref{fig:data2complex}. (b)The $2$-simplex $[A,B]$ is included in the co-authorship complex sinece $A$ and $B$ are $2$ neighbor. The cochain on $[A,B]$ is given by the sum of the citations on the neighboring papers. (c) Co-authorship complex with cochains built from the citations on papers.}\label{fig:bipartite}
+\caption{Constructing a simplicial complex and its cochain from a bipartite graph. (a) Paper-author bipartite graph using the data of Figure~\ref{fig:data2complex}. (b)The $2$-simplex $[A,B]$ is included in the coauthorship complex sinece $A$ and $B$ are $2$ neighbor. The cochain on $[A,B]$ is given by the sum of the citations on the neighboring papers. (c) Co-authorship complex with cochains built from the citations on papers.}\label{fig:bipartite}
 \end{figure}
 
 
 
-We report in the following table the number of simplices in dimension $k=0,1,2$ of the co-authorship complexes CC1 and CC2. In Figure~\ref{fig:dist-cochains} we show the distribution of the values of the cochains in CC1 and CC2.
+We report in the following table the number of simplices in dimension $k=0,1,2$ of the coauthorship complexes CC1 and CC2. In Figure~\ref{fig:dist-cochains} we show the distribution of the values of the cochains in CC1 and CC2.
 \begin{table}[htbp]
   \centering
   \scriptsize{
@@ -49,7 +49,7 @@ We report in the following table the number of simplices in dimension $k=0,1,2$ 
   \end{tabular}}
   \vspace{2pt}
   \caption{%
-  Number of simplices of the two co-authorship complexes sampled from Semantic Scholar.
+  Number of simplices of the two coauthorship complexes sampled from Semantic Scholar.
   } \label{table:Simplices-coauthor}
 \end{table}
 
