@@ -5,56 +5,6 @@ Suppose that $\sigma$ and $\tau$ are $p$-simplices for which $(\nu_0, \nu_1, \do
 
 \paragraph{Coauthorship complexes.}
 Given a set of papers with their respective authors, a coauthorships complex is built by adding a $(k-1)$-simplex for each paper with $k$ authors. Differently from hypergraphs, simplicial complexes are closed under subsets. This means that when one adds a $(k-1)$-simplex all its subsimplices are included. The added subsimplices represent collaborations among subgroups of the authors in writing the same paper. For this reason simplicial complexes seem the natural mathematical framework to encode $n$-fold interactions. In a more general setting, a simplicial complex representing $n$-fold interactions can be constructed as the one-mode projection of a bipartite graph. Namely, given a bipartite graph $X$-$Y$, the simplicial projection on $Y$ is the simplicial complex whose $(k-1)$-simplices are sets of $k$ neighboring vertices in $Y$. For example, our coauthorships complexes are constructed as simplicial projections of the paper-author bipartite graph (see Figure~\ref{fig:bipartite}). In this setting, cochains on the simplicial projection come naturally from weights on $X$. Specifically, given any $(k-1)$-simplex $[y_1,\dots,y_k]$ and its neighbor vertices $\{x_1,\dots,x_j\}\subseteq X$ one can define a $k$-cochain as $\phi(\{x_1,\dots,x_j\})$, for any function $\phi: \mathcal{P(X)}\longrightarrow \RR $. In our case, the function is the sum and the wights are given by the number of citations (see Figure~\ref{fig:bipartite}).
-\begin{figure}[htpb]
-%\begin{table*}[!t]
-\savebox{\tempbox}{% compute size of tabulat
-\scriptsize{
-\begin{tabular}{llr}
-    \toprule
-    Papers & Authors & Citations \\
-    \midrule
-    Paper I & A, B, C  & 100  \\
-    Paper II &  A, B & 50\\
-    Paper III & A, D & 10\\
-    Paper IV & C, D & 4\\
-    \bottomrule
-  \end{tabular}
-}}%
-\settowidth{\tempwidth}{\usebox{\tempbox}}%
-\hfil\begin{minipage}[b]{\tempwidth}%
-\raisebox{-\height}{\usebox{\tempbox}}%
-%\vspace{-7pt}
-\scriptsize{\caption*{(a)}}%
-\label{table:data}%
-\end{minipage}%
-\savebox{\tempbox}{\includegraphics[height=2.3cm]{./figures/cc1.png}}%
-\settowidth{\tempwidth}{\usebox{\tempbox}}%
-\hfil\begin{minipage}[b]{\tempwidth}%
-\raisebox{-\height}{\usebox{\tempbox}}%
-\scriptsize{\captionof*{figure}{(b)}}%
-\label{fig:co-authoship-complex}%
-\end{minipage}%
-\vspace{5pt}
-%\end{table*}
-\savebox{\tempbox}{\scriptsize{
-\begin{blockarray}{cccccc}
-\tiny{AB} & \tiny{AC} & \tiny{AD} & \tiny{BC} & \tiny{CD} \\
-\begin{block}{(ccccc)c}
-  3 & 0 & 1 & 0 & 0 & \tiny{AB} \\
-  0 & 3 & 1 & 0 & -1 & \tiny{AC} \\
-  1 & 1 & 2 & 0 & 1 & \tiny{AD} \\
-  0 & 0 & 0 & 3 & -1 & \tiny{BC}\\
-  0 & -1 & 1 & -1 & 2 & \tiny{CD}\\
-\end{block}
-\end{blockarray}}}%
-\settowidth{\tempwidth}{\usebox{\tempbox}}%
-\hfil\begin{minipage}[b]{\tempwidth}%
-\raisebox{-\height}{\usebox{\tempbox}}%
-\scriptsize{\captionof*{figure}{(c)}}%
-\end{minipage}%
-%\end{table*}
-\caption{Constructing a simplicial complex from data. (a) Coauthorship data. (b) Coauthorship complex. (c) Degree-$1$ Laplacian of the coauthorship complex.}\label{fig:data2complex}
-\end{figure}
 
 \begin{figure}[htpb]
 %\begin{table*}[!t]
