@@ -1,8 +1,7 @@
 \paragraph{Simplicial convolution.}
-\mdeff{No motivation here: That goes in the intro.}
 A convolutional layer is of the form $f\ast \varphi_W$, where $\ast$ denotes convolution, and $\varphi_W$ is a function
 \emph{with small support} parameterized by learnable weights $W$.
-Typically, $\varphi_W$ is just locally constant in a small spatial region, and is zero elsewhere. This formulation of CNNs lends itself to a spectral interpretation that we exploit to extend CNNs to a much more general setting.
+Typically, $\varphi_W$ is locally constant in a small spatial region, and is zero elsewhere. This formulation of CNNs lends itself to a spectral interpretation that we exploit to extend CNNs to a much more general setting.
 
 Motivated by the fact that the discrete Fourier transform of a real-valued function on an $n$-dimensional cubical grid coincides with its decomposition into a linear combination of the eigenfunctions of the graph Laplacian for that grid, we define the Fourier transform $\mathcal{F}_p: C^p(K) \to \mathbb{R}^{\lvert K_p \rvert}$ of real $p$-cochains on a simplicial complex with Laplacians $\mathcal{L}_p$ as $\mathcal{F}_p(c) = \left(\ip{c}{e_1}_p, \ip{c}{e_2}_p, \dotsc, \ip{c}{e_{\lvert K_p \rvert}}_p\right)$, where the $e_i$'s are the eigencochains of $\mathcal{L}_p$ ordered by eigenvalues $\lambda_1\leq\dotsm\leq\lambda_{\lvert K_p \rvert}$. The function $\mathcal{F}_p$ is invertible since $\mathcal{L}_p$ is diagonalizable; explicitly, if we write $U\diag(\Lambda)U\transpose$ for a normalized eigendecomposition, the orthonormal matrices $U$ and $U\transpose$ represent $\mathcal{F}\inv_p$ and $\mathcal{F}_p$, respectively. This is the foundation for Barbarossa's development of signal processing on simplicial complexes~\cite{barbarossa2018learning}.
 

@@ -33,6 +33,57 @@ Given a set of papers with their respective authors, a coauthorships complex is 
 \caption{Constructing a simplicial complex and its cochain from a bipartite graph. (a) Paper-author bipartite graph using the data of Figure~\ref{fig:data2complex}. (b)The $2$-simplex $[A,B]$ is included in the co-authorship complex sinece $A$ and $B$ are $2$ neighbor. The cochain on $[A,B]$ is given by the sum of the citations on the neighboring papers. (c) Co-authorship complex with cochains built from the citations on papers.}\label{fig:bipartite}
 \end{figure}
 
+\begin{figure}[htpb]
+%\begin{table*}[!t]
+\savebox{\tempbox}{% compute size of tabulat
+\scriptsize{
+\begin{tabular}{llr}
+    \toprule
+    Papers & Authors & Citations \\
+    \midrule
+    Paper I & A, B, C  & 100  \\
+    Paper II &  A, B & 50\\
+    Paper III & A, D & 10\\
+    Paper IV & C, D & 4\\
+    \bottomrule
+  \end{tabular}
+}}%
+\settowidth{\tempwidth}{\usebox{\tempbox}}%
+\hfil\begin{minipage}[b]{\tempwidth}%
+\raisebox{-\height}{\usebox{\tempbox}}%
+%\vspace{-7pt}
+\scriptsize{\caption*{(a)}}%
+\label{table:data}%
+\end{minipage}%
+\savebox{\tempbox}{\includegraphics[height=2.3cm]{./figures/cc1.png}}%
+\settowidth{\tempwidth}{\usebox{\tempbox}}%
+\hfil\begin{minipage}[b]{\tempwidth}%
+\raisebox{-\height}{\usebox{\tempbox}}%
+\scriptsize{\captionof*{figure}{(b)}}%
+\label{fig:co-authoship-complex}%
+\end{minipage}%
+\vspace{5pt}
+%\end{table*}
+\savebox{\tempbox}{\scriptsize{
+\begin{blockarray}{cccccc}
+\tiny{AB} & \tiny{AC} & \tiny{AD} & \tiny{BC} & \tiny{CD} \\
+\begin{block}{(ccccc)c}
+  3 & 0 & 1 & 0 & 0 & \tiny{AB} \\
+  0 & 3 & 1 & 0 & -1 & \tiny{AC} \\
+  1 & 1 & 2 & 0 & 1 & \tiny{AD} \\
+  0 & 0 & 0 & 3 & -1 & \tiny{BC}\\
+  0 & -1 & 1 & -1 & 2 & \tiny{CD}\\
+\end{block}
+\end{blockarray}}}%
+\settowidth{\tempwidth}{\usebox{\tempbox}}%
+\hfil\begin{minipage}[b]{\tempwidth}%
+\raisebox{-\height}{\usebox{\tempbox}}%
+\scriptsize{\captionof*{figure}{(c)}}%
+\end{minipage}%
+%\end{table*}
+\caption{Constructing a simplicial complex from data. (a) Coauthorship data. (b) Coauthorship complex with corresponding cochains built from the data. (c) Degree-$1$ Laplacian of the coauthorship complex.}\label{fig:data2complex}
+\end{figure}
+
 
 
 We report in the following table the number of simplices in dimension $k=0,1,2$ of the co-authorship complexes CC1 and CC2. In Figure~\ref{fig:dist-cochains} we show the distribution of the values of the cochains in CC1 and CC2.

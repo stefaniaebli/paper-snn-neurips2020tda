@@ -10,56 +10,5 @@ Let $C^p(K)$ be the set of functions $K_p\to\RR$, with the obvious vector space 
 \end{equation*}
 Observe that this definition can be thought of in geometric terms: the support of $\delta^p(f)$ is contained in the set of $(p+1)$-simplices that are cofaces of the $p$-simplices that make up the support of $f$.
 
-\begin{figure}[htpb]
-%\begin{table*}[!t]
-\savebox{\tempbox}{% compute size of tabulat
-\scriptsize{
-\begin{tabular}{llr}
-    \toprule
-    Papers & Authors & Citations \\
-    \midrule
-    Paper I & A, B, C  & 100  \\
-    Paper II &  A, B & 50\\
-    Paper III & A, D & 10\\
-    Paper IV & C, D & 4\\
-    \bottomrule
-  \end{tabular}
-}}%
-\settowidth{\tempwidth}{\usebox{\tempbox}}%
-\hfil\begin{minipage}[b]{\tempwidth}%
-\raisebox{-\height}{\usebox{\tempbox}}%
-%\vspace{-7pt}
-\scriptsize{\caption*{(a)}}%
-\label{table:data}%
-\end{minipage}%
-\savebox{\tempbox}{\includegraphics[height=2.3cm]{./figures/cc1.png}}%
-\settowidth{\tempwidth}{\usebox{\tempbox}}%
-\hfil\begin{minipage}[b]{\tempwidth}%
-\raisebox{-\height}{\usebox{\tempbox}}%
-\scriptsize{\captionof*{figure}{(b)}}%
-\label{fig:co-authoship-complex}%
-\end{minipage}%
-\vspace{5pt}
-%\end{table*}
-\savebox{\tempbox}{\scriptsize{
-\begin{blockarray}{cccccc}
-\tiny{AB} & \tiny{AC} & \tiny{AD} & \tiny{BC} & \tiny{CD} \\
-\begin{block}{(ccccc)c}
-  3 & 0 & 1 & 0 & 0 & \tiny{AB} \\
-  0 & 3 & 1 & 0 & -1 & \tiny{AC} \\
-  1 & 1 & 2 & 0 & 1 & \tiny{AD} \\
-  0 & 0 & 0 & 3 & -1 & \tiny{BC}\\
-  0 & -1 & 1 & -1 & 2 & \tiny{CD}\\
-\end{block}
-\end{blockarray}}}%
-\settowidth{\tempwidth}{\usebox{\tempbox}}%
-\hfil\begin{minipage}[b]{\tempwidth}%
-\raisebox{-\height}{\usebox{\tempbox}}%
-\scriptsize{\captionof*{figure}{(c)}}%
-\end{minipage}%
-%\end{table*}
-\caption{Constructing a simplicial complex from data. (a) Coauthorship data. (b) Coauthorship complex with corresponding cochains built from the data. (c) Degree-$1$ Laplacian of the coauthorship complex.}\label{fig:data2complex}
-\end{figure}
-
 \paragraph{Simplicial Laplacians.}
-We are in this paper concerned with finite abstract simplicial complexes, although our method is applicable to a much broader setting, e.g.\ CW-complexes. In analogy with Hodge--de Rham theory~\cite{madsen1997calculus}, we define the \emph{degree-$i$ simplicial Laplacian} of a simplicial complex $K$ as the linear map $C^i(K)\to C^i(K)$ given by $\lap_i = \lapu_i + \lapd_i = \delta^{i\ast}\circ\delta^{i} + \delta^{i-1}\circ\delta^{i-1\ast}$, where $\delta^{i\ast}$ is the adjoint of the coboundary with respect to the inner product (typically the one making the indicator function basis orthonormal). In most practical applications, the coboundary can be represented as a sparse matrix $B_i$ and the Laplacians can be efficiently computed as $L_i=B_i\transpose B_{i}+B_{i-1}B_{i-1}\transpose$. The matrices $L_0$ and $B_0$ are the classic graph Laplacian and incidence matrix. Note that the Laplacians carry valuable topological information about the complex: The kernel of the $k$-Laplacian is isomorphic to the $k$-(co)homology of its associated simplicial complex~\cite{eckmann1944,horak2013spectra}.\footnote{In other words, the number of zero-eigenvalues tells us the number of $k$-dimensional holes.}
+We are in this paper concerned with finite abstract simplicial complexes, although our method is applicable to a much broader setting, e.g.\ CW-complexes. In analogy with Hodge--de Rham theory~\cite{madsen1997calculus}, we define the \emph{degree-$i$ simplicial Laplacian} of a simplicial complex $K$ as the linear map $C^i(K)\to C^i(K)$ given by $\lap_i = \lapu_i + \lapd_i = \delta^{i\ast}\circ\delta^{i} + \delta^{i-1}\circ\delta^{i-1\ast}$, where $\delta^{i\ast}$ is the adjoint of the coboundary with respect to the inner product (typically the one making the indicator function basis orthonormal). In most practical applications, the coboundary can be represented as a sparse matrix $B_i$ and the Laplacians can be efficiently computed as $L_i=B_i\transpose B_{i}+B_{i-1}B_{i-1}\transpose$. The matrices $L_0$ and $B_0$ are the classic graph Laplacian and incidence matrix\footnote{Note that the Laplacians carry valuable topological information about the complex: The kernel of the $k$-Laplacian is isomorphic to the $k$-(co)homology of its associated simplicial complex~\cite{eckmann1944,horak2013spectra}.}.
