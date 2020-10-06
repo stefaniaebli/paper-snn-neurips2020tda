@@ -66,5 +66,4 @@ We are in this paper concerned with finite abstract simplicial complexes, althou
 \begin{equation*}
   \lap_i = \lapu_i + \lapd_i = \delta^{i\ast}\circ\delta^{i} + \delta^{i-1}\circ\delta^{i-1\ast},
 \end{equation*}
-
 where $\delta^{i\ast}$ is the adjoint of the coboundary with respect to the inner product (typically the one making the indicator function basis orthonormal). In most practical applications, the coboundary can be represented as a sparse matrix $B_i$ and the Laplacians can be efficiently computed as $L_i=B_i\transpose B_{i}+B_{i-1}B_{i-1}\transpose$. The matrices $L_0$ and $B_0$ are the classic graph Laplacian and incidence matrix. Note that the Laplacians carry valuable topological information about the complex: The kernel of the $k$-Laplacian is isomorphic to the $k$-(co)homology of its associated simplicial complex~\cite{eckmann1944,horak2013spectra}.\footnote{In other words, the number of zero-eigenvalues tells us the number of $k$-dimensional holes.}
