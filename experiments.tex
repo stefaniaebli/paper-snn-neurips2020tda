@@ -15,28 +15,14 @@ We evaluated the performance of the SNNs on the task of imputing missing data on
 \paragraph{Results.}
 Figure~\ref{fig:accuracy-error} (a-b) shows the mean accuracy (MA) and absolute error distribution (AED) (see the supplementary material for definitions) of the SNN in inputing missing citations on CC1. Observe that the distribution of the prediction error accumulates close to zero.
 
-\begin{figure}[tb]
-\centering
- \begin{subfigure}[t]{-0.8\textwidth}
- \vspace{-4cm}
-    \text{(a)}
-  \end{subfigure}
-\begin{subfigure}[t]{0.8\textwidth}
-\centering
-   \includegraphics[scale=0.35]{./figures/accuracy_network1.png}
-\end{subfigure}
- \begin{subfigure}[t]{0.8\textwidth}
-    \text{(b)}
-  \end{subfigure}
-\begin{subfigure}[t]{0.8\textwidth}
-\centering
-\vspace{-0.5cm}
-   \includegraphics[scale=0.36]{./figures/Error_dist_start150250_seed6666_notsee40.png}
-\end{subfigure}
-\caption{(a) Mean Accuracy $\pm$ standard deviation over 5 samples of SNN in imputing missing citations on CC1. (b) Absolute Error Distribution over 1 sample for $40\%$ missing values in CC1.}
+\begin{figure}[htbp]
+  \centering
+  \makebox[\textwidth][c]{
+  \includegraphics{figures/foo.pdf}
+  \includegraphics{figures/foo-2.pdf} }
+\caption{\textbf{Left:} Mean Accuracy $\pm$ standard deviation over 5 samples of SNN in imputing missing citations on CC1. \textbf{Right:} Absolute Error Distribution over 1 sample for $40\%$ missing values in CC1.}
 \label{fig:accuracy-error}
 \end{figure}
-
 
 
 As a second assessment, we evaluate how accurately an SNN trained on one coauthorship complex can impute missing citations on a different complex. Over the assumption that coauthorship complexes share a similar structure and the same data underlies the generating process of cochains.
@@ -48,7 +34,7 @@ Comparison with stronger imputation algorithms is left for future work.
 
 \begin{figure}[htbp]
   \centering
-\includegraphics[scale=0.35]{./figures/accuracy_network1_pretrained.png}
+  \includegraphics{figures/foo-transfer.pdf}
   \caption{Mean Accuracy $\pm$ standard deviation over 5 samples in imputing missing citations on CC1 with an SNN trained on CC2.} \label{fig:transfer-learning}
 \end{figure}
 
