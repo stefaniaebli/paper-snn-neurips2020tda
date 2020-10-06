@@ -1,12 +1,8 @@
 \paragraph{Simplicial convolution.}
-%Classical CNNs were introduced with image data, or other similarly structured data, in mind. Indeed, they can be seen as a way to exploit the regularity of pixels (or voxels, or toxels, and so forth) and their neighbor relations. \gard{The previous two sentences can be removed if space constraints make it necessary.}
-\stefania{Check commented paragraph} \mdeff{No motivation here: That goes in the intro.}
+\mdeff{No motivation here: That goes in the intro.}
 A convolutional layer is a linear transformation of the form $f\ast \varphi_W$, where $\ast$ denotes convolution, and $\varphi_W$ is a function
-\emph{with small support} \mdeff{needs not be}
-parameterized by some learnable weights $W$.
-Typically, $\varphi_W$ just takes constant values determined by $W$ in a small spatial region, and is zero elsewhere.
-\mdeff{$\varphi_W$ might have local support, but why constant?}
-While this seems like an overly complicated way to phrase an idea that is nearly trivial for discrete data on a regular rectangular domain, it does lend itself to a spectral interpretation that we exploit to extend CNNs in a much more general setting, as was originally done for graph CNNs.
+\emph{with small support} parameterized by some learnable weights $W$.
+Typically, $\varphi_W$ is just locally constant in a small spatial region, and is zero elsewhere. While this seems like an overly complicated way to phrase an idea that is nearly trivial for discrete data on a regular rectangular domain, it does lend itself to a spectral interpretation that we exploit to extend CNNs in a much more general setting, as was originally done for graph CNNs.
 
 Motivated by the fact that the discrete Fourier transform of a real-valued function on an $n$-dimensional cubical grid coincides with its decomposition into a linear combination of the eigenfunctions of the graph Laplacian for that grid, we define the Fourier transform of real $p$-cochains on a simplicial complex with Laplacians $\mathcal{L}_p$ as
 \begin{align*}
@@ -20,28 +16,24 @@ Recall that on the function classes for which it is defined, the classical Fouri
   c\ast_p c' = \mathcal{F}_p\inv\left(\mathcal{F}_p(c)\cdot\mathcal{F}_p(c')\right),
 \end{equation*}
 where $\cdot$ denotes pointwise multiplication.
-\mdeff{This definition is problematic: We can only meaningfully convolve two cochains when we can shift/move/translate a cochain on the complex (like translation for Euclidean conv, or in general the action of a symmetry group). We say that we can localize a filter (by convolution with a delta), but not translate it.}
 
 Within this framework, we are led to define a \emph{simplicial convolutional layer} with input $p$-cochain $c$ and weights $W$ as being of the form
 \begin{equation*}
   \mathcal{F}\inv_p(\varphi_W)\ast_p c ,
 \end{equation*}
-for some as of yet unspecified $\varphi_W\in\mathbb{R}^{\lvert K_p \rvert}$ parameterized by learnable weights $W$. To ensure the central property that a convolutional layer be localizing \mdeff{I see localization as a good way to reduce computational cost.}, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
+for some as of yet unspecified $\varphi_W\in\mathbb{R}^{\lvert K_p \rvert}$ parameterized by learnable weights $W$. To ensure the central property that a convolutional layer be localizing, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
 \begin{equation*}
   \varphi_W = \sum_{i=0}^N W_i\Lambda^i = \sum_{i=0}^N W_i(\lambda^i_1, \lambda^i_2, \dotsc, \lambda^i_{\lvert K_p \rvert}),
 \end{equation*}
 for small $N$. In signal processing parlance, one would say that such a convolutional layer \emph{learns filters that are low-degree polynomials in the frequency domain}.
 
-The reason for restricting the filters to be these low-degree polynomials (in the frequency domain \mdeff{they are also in the spatial domain, the basis is irrelevant}) is best appreciated when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then
+The reason for restricting the filters to be these low-degree polynomials (in the frequency domain) is best appreciated when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then
 \begin{equation}
   \mathcal{F}\inv_p(\varphi_W)\ast_p c = \sum_{i=0}^N W_iU\diag(\Lambda^i)U\transpose c = \sum_{i=0}^N W_i\left(U\diag(\Lambda)U\transpose\right)^i c = \sum_{i=0}^NW_iL^i_pc. \label{eq:filter}
 \end{equation}
-This is important for two reasons. First, it shows that the layer can be efficiently implemented by $N$ sparse matrix-vector multiplications (or $\mathcal{O}(N^2)$ of them if the most sparsity is desired). Like for traditional CNN layers, this reduces the computational complexity of the layer from $\mathcal{O}(\lvert K_p\rvert^2)$ to $\mathcal{O}(\xi\lvert K_p\rvert)$ when the $\xi$ is the density factor. Second, it shows that the operation is $N$-localizing in the sense that if two simplices $\sigma,\tau$ are more than $N$ hops apart, then a degree-$N$ convolutional layer does not cause interaction between $c(\sigma)$ and $c(\tau)$ in its output (see Section~\ref{sec:supp_material}).
+This is important for two reasons. First, it shows that the layer can be efficiently implemented by $N$ sparse matrix-vector multiplications (or $\mathcal{O}(N^2)$ of them if the most sparsity is desired). Like for traditional CNN layers, this reduces the computational complexity of the layer from $\mathcal{O}(\lvert K_p\rvert^2)$ to $\mathcal{O}(\xi\lvert K_p\rvert)$ when the $\xi$ is the density factor. Second, it shows that the operation is $N$-localizing in the sense that if two simplices $\sigma,\tau$ are more than $N$ hops apart, then a degree-$N$ convolutional layer does not cause interaction between $c(\sigma)$ and $c(\tau)$ in its output (see the supplementary material).
 
 In practice we implement \refeq{filter} using Chebyshev polynomials, as suggested for GNNs in~\cite{defferrard2016convolutional}.
 
-%\stefania{Kathryn: What do you think about writing since the beginning all the operation using $U$? Guillaume was suggetsing that it might be easier to read in that way. However as it is written now I think it is more elegant.   }
-%\gard{Re Stefania's comment above: I understand the point, but I don't think it becomes easier to read. It becomes more like Barbarossa's and other EE papers, perhaps, but that just mires the reader in keeping track of seemingly arbitrary bases (beyond the arbitrary ordering of eigencochains). With the above formulation, one can trace a path all the way back to the most basic notion of a CNN if one interprets the first appearance of ``$f\ast \varphi_W$'' the right way. I really think that that way of understanding even the classical CNNs is the best chance one has to make them less ad-hoc and more generalizable. While I don't know if there are practical implications of this, it does keep an open road directly to ``deep learning over locally compact groups'', for example. As far as I know, people haven't gone there yet, but it doesn't seem right not to leave the road open (not that we discovered the road --- the road is obvious.)}
-%\mdeff{Agree to keep it basis-free. I think that convolution should be sold as a linear map that is a function of the Laplace operator (doesn't matter that the operator is diagonalized by U).}
-%mdeff{Re Gard: the eigencochains are not arbitrarily ordered. The eigenvalue is a measure of variation of an eigencochain. The whole decomposition can be seen as PCA: the eigencochains corresponding to the lowest eigenvalues capture most of the structure.}
-%mdeff{People have done DL on groups, like SO(3).}
+Since the Laplacians encode information about the adjacency of the simplices, they can be interpreted as a message passing functions~\cite{gilmer2017NeuralMP}.
+
