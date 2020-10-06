@@ -40,8 +40,9 @@ Figure~\ref{fig:accuracy-error} (a-b) shows the mean accuracy (MA) and absolute 
 As a second assessment, we evaluate how accurately an SNN trained on one coauthorship complex can impute missing citations on a different complex. Over the assumption that coauthorship complexes share a similar structure and the same data underlies the generating process of cochains.
 Figure~\ref{fig:transfer-learning} shows the MA in predicting missing citations on CC1 using the above architecture of SNN trained on CC2. Observe that the accuracy of the pretrained network on CC2 is comparable to the result shown in Figure~\ref{fig:accuracy-error}. We believe that this is expected in situations where the topological structure of the underlying complex is similar before and after transfer.
 
-Table~\ref{table:comparison-SNN} shows the performance of two statistical baselines: missing values inferred as the mean or median of all known values, and missing values inferred from the mean of $(k-1)$ and $(k+1)$ neighbors of the simplices ($k$-simplicial neighbor $k$-sn). SNNs well outperform these baselines.
-Comparison with other state-of-the-art imputation algorithms is left for future work.
+Table~\ref{table:comparison-SNN} shows the performance of two baselines: missing values inferred as (i) the mean or median of all known values, and (ii) the mean of the $(k-1)$ and $(k+1)$ neighboring simplices.
+SNNs well outperform these baselines.
+Comparison with stronger imputation algorithms is left for future work.
 
 \begin{figure}[htbp]
   \centering
@@ -49,7 +50,6 @@ Comparison with other state-of-the-art imputation algorithms is left for future 
   \caption{Mean Accuracy $\pm$ standard deviation over 5 samples in imputing missing citations on CC1 with an SNN trained on CC2.} \label{fig:transfer-learning}
 \end{figure}
 
-%\scriptsize{
 \begin{table}[htbp]
   \centering
   \scriptsize{
@@ -57,14 +57,13 @@ Comparison with other state-of-the-art imputation algorithms is left for future 
     \toprule
     Method   & CC1 - dim 0   & CC1 - dim 1   & CC1 - dim 2   & CC2 - dim 0  & CC2 - dim 1  & CC2 - dim 2 \\
     \midrule
-   Global Mean & $3.30 \pm 0.82$ & $5.75\pm 1.28$  &$ 2.96\pm 0.49$  & $3.32 \pm 0.85$ & $8.31 \pm 1.03$  & $7.90\pm 0.35$\\
+    Global Mean & $3.30 \pm 0.82$ & $5.75\pm 1.28$  &$ 2.96\pm 0.49$  & $3.32 \pm 0.85$ & $8.31 \pm 1.03$  & $7.90\pm 0.35$\\
     Global Median & $7.78 \pm 2.70$   & $10.44 \pm 1.00$ &$ 12.50 \pm 0.63 $ & $5.55 \pm 0.38 $&$ 6.28\pm 0.36  $&$ 6.06\pm 0.20$\\
-    $k$-sn & $11.88\pm 5.29 $& $24.15 \pm 1.85$ & $27.38 \pm 1.18  $& $16.45 \pm 1.83 $&$ 30.67\pm 2.13$   &$ 24.85 \pm 0.57 $\\
+    Neighbors Mean & $11.88\pm 5.29 $& $24.15 \pm 1.85$ & $27.38 \pm 1.18  $& $16.45 \pm 1.83 $&$ 30.67\pm 2.13$   &$ 24.85 \pm 0.57 $\\
     \bottomrule
   \end{tabular}}
-   \vspace{2pt}
+  \vspace{2pt}
   \caption{%
       Performance of baselines: Mean Accuracy $\pm$ standard deviation for $30\%$ missing data over 5 samples.
-}
   }\label{table:comparison-SNN}
-\end{table}%}
+\end{table}
