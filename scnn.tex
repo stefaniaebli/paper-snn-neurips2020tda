@@ -1,27 +1,18 @@
 \paragraph{Simplicial convolution.}
 \mdeff{No motivation here: That goes in the intro.}
-A convolutional layer is a linear transformation of the form $f\ast \varphi_W$, where $\ast$ denotes convolution, and $\varphi_W$ is a function
-\emph{with small support} parameterized by some learnable weights $W$.
-Typically, $\varphi_W$ is just locally constant in a small spatial region, and is zero elsewhere. While this seems like an overly complicated way to phrase an idea that is nearly trivial for discrete data on a regular rectangular domain, it does lend itself to a spectral interpretation that we exploit to extend CNNs in a much more general setting, as was originally done for graph CNNs.
+A convolutional layer is of the form $f\ast \varphi_W$, where $\ast$ denotes convolution, and $\varphi_W$ is a function
+\emph{with small support} parameterized by learnable weights $W$.
+Typically, $\varphi_W$ is just locally constant in a small spatial region, and is zero elsewhere. This formulation of CNNs lends itself to a spectral interpretation that we exploit to extend CNNs to a much more general setting.
 
-Motivated by the fact that the discrete Fourier transform of a real-valued function on an $n$-dimensional cubical grid coincides with its decomposition into a linear combination of the eigenfunctions of the graph Laplacian for that grid, we define the Fourier transform of real $p$-cochains on a simplicial complex with Laplacians $\mathcal{L}_p$ as
-\begin{align*}
-  &\mathcal{F}_p: C^p(K) \to \mathbb{R}^{\lvert K_p \rvert} \\
-  &\mathcal{F}_p(c) = \left(\ip{c}{e_1}_p, \ip{c}{e_2}_p, \dotsc, \ip{c}{e_{\lvert K_p \rvert}}_p\right),
-\end{align*}
-where the $e_i$'s are the eigencochains of $\mathcal{L}_p$ ordered by ascending eigenvalues (which we label $\lambda_1\leq\dotsm\leq\lambda_{\lvert K_p \rvert}$). The function $\mathcal{F}_p$ is invertible since $\mathcal{L}_p$ is diagonalizable; explicitly, if we write $U\diag(\Lambda)U\transpose$ for a normalized eigendecomposition, the orthonormal matrices $U$ and $U\transpose$ represent $\mathcal{F}\inv_p$ and $\mathcal{F}_p$, respectively. This is the foundation for Barbarossa's development of signal processing on simplicial complexes~\cite{barbarossa2018learning}.
-
-Recall that on the function classes for which it is defined, the classical Fourier transform satisfies $\mathcal{F}(f\ast g)=\mathcal{F}(f)\mathcal{F}(g)$, where the right hand side denotes pointwise multiplication. This will be our definition of convolution in the simplicial setting. Indeed, for cochains $c,c'\in C^p(K)$ we define their convolution as the cochain
+Motivated by the fact that the discrete Fourier transform of a real-valued function on an $n$-dimensional cubical grid coincides with its decomposition into a linear combination of the eigenfunctions of the graph Laplacian for that grid, we define the Fourier transform of real $p$-cochains on a simplicial complex with Laplacians $\mathcal{L}_p$, $\mathcal{F}_p: C^p(K) \to \mathbb{R}^{\lvert K_p \rvert}$ as
 \begin{equation*}
-  c\ast_p c' = \mathcal{F}_p\inv\left(\mathcal{F}_p(c)\cdot\mathcal{F}_p(c')\right),
+  \mathcal{F}_p(c) = \left(\ip{c}{e_1}_p, \ip{c}{e_2}_p, \dotsc, \ip{c}{e_{\lvert K_p \rvert}}_p\right),
 \end{equation*}
-where $\cdot$ denotes pointwise multiplication.
+where the $e_i$'s are the eigencochains of $\mathcal{L}_p$ ordered by eigenvalues $\lambda_1\leq\dotsm\leq\lambda_{\lvert K_p \rvert}$. The function $\mathcal{F}_p$ is invertible since $\mathcal{L}_p$ is diagonalizable; explicitly, if we write $U\diag(\Lambda)U\transpose$ for a normalized eigendecomposition, the orthonormal matrices $U$ and $U\transpose$ represent $\mathcal{F}\inv_p$ and $\mathcal{F}_p$, respectively. This is the foundation for Barbarossa's development of signal processing on simplicial complexes~\cite{barbarossa2018learning}.
 
-Within this framework, we are led to define a \emph{simplicial convolutional layer} with input $p$-cochain $c$ and weights $W$ as being of the form
-\begin{equation*}
-  \mathcal{F}\inv_p(\varphi_W)\ast_p c ,
-\end{equation*}
-for some as of yet unspecified $\varphi_W\in\mathbb{R}^{\lvert K_p \rvert}$ parameterized by learnable weights $W$. To ensure the central property that a convolutional layer be localizing, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
+Recall that on the function classes for which it is defined, the classical Fourier transform satisfies $\mathcal{F}(f\ast g)=\mathcal{F}(f)\mathcal{F}(g)$, where the right hand side denotes pointwise multiplication. This will be our definition of convolution in the simplicial setting. Indeed, for cochains $c,c'\in C^p(K)$ we \emph{define} their convolution as the cochain $c\ast_p c' = \mathcal{F}_p\inv\left(\mathcal{F}_p(c)\cdot\mathcal{F}_p(c')\right)$ where $\cdot$ denotes pointwise multiplication.
+
+Within this framework, we are led to define a \emph{simplicial convolutional layer} with input $p$-cochain $c$ and weights $W$ as being of the form $\mathcal{F}\inv_p(\varphi_W)\ast_p c$ for some as of yet unspecified $\varphi_W\in\mathbb{R}^{\lvert K_p \rvert}$ parameterized by learnable weights $W$. To ensure the central property that a convolutional layer be localizing, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
 \begin{equation*}
   \varphi_W = \sum_{i=0}^N W_i\Lambda^i = \sum_{i=0}^N W_i(\lambda^i_1, \lambda^i_2, \dotsc, \lambda^i_{\lvert K_p \rvert}),
 \end{equation*}
@@ -31,9 +22,7 @@ The reason for restricting the filters to be these low-degree polynomials (in th
 \begin{equation}
   \mathcal{F}\inv_p(\varphi_W)\ast_p c = \sum_{i=0}^N W_iU\diag(\Lambda^i)U\transpose c = \sum_{i=0}^N W_i\left(U\diag(\Lambda)U\transpose\right)^i c = \sum_{i=0}^NW_iL^i_pc. \label{eq:filter}
 \end{equation}
-This is important for two reasons. First, it shows that the layer can be efficiently implemented by $N$ sparse matrix-vector multiplications (or $\mathcal{O}(N^2)$ of them if the most sparsity is desired). Like for traditional CNN layers, this reduces the computational complexity of the layer from $\mathcal{O}(\lvert K_p\rvert^2)$ to $\mathcal{O}(\xi\lvert K_p\rvert)$ when the $\xi$ is the density factor. Second, it shows that the operation is $N$-localizing in the sense that if two simplices $\sigma,\tau$ are more than $N$ hops apart, then a degree-$N$ convolutional layer does not cause interaction between $c(\sigma)$ and $c(\tau)$ in its output (see the supplementary material).
-
-In practice we implement \refeq{filter} using Chebyshev polynomials, as suggested for GNNs in~\cite{defferrard2016convolutional}.
+This is important for two reasons. First, it shows that the layer can be efficiently implemented by $N$ sparse matrix-vector multiplications. Like for traditional CNN layers, this reduces the computational complexity of the layer from $\mathcal{O}(\lvert K_p\rvert^2)$ to $\mathcal{O}(\xi\lvert K_p\rvert)$ when the $\xi$ is the density factor. Second, it shows that the operation is $N$-localizing in the sense that if two simplices $\sigma,\tau$ are more than $N$ hops apart, then a degree-$N$ convolutional layer does not cause interaction between $c(\sigma)$ and $c(\tau)$ in its output (see the supplementary material). In practice we implement \refeq{filter} using Chebyshev polynomials, as suggested for GNNs in~\cite{defferrard2016convolutional}.
 
 Since the Laplacians encode information about the adjacency of the simplices, they can be interpreted as a message passing functions~\cite{gilmer2017NeuralMP}.
 
