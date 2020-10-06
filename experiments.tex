@@ -6,8 +6,9 @@ GNNs have recently proved to be a powerful tool for this task~\cite{spinelli2020
 With a view that our method incorporates additional higher-dimensional structure in the data, we evaluate the performance of the SNNs in imputing missing data over simplicial complexes.
 
 \paragraph{Data.}
-A \emph{coauthorship complex}~\cite{patania2017} is a simplicial complex where a paper with $k$ authors is represented by a $(k-1)$-simplex (see the supplementary material for details). The added subsimplices of the $k-1$-simplex are interpreted as collaborations among subgroups of authors.
-We sampled two coauthorship complexes---CC1 and CC2, see Table~\ref{table:Simplices-coauthor} for statistics---from the Semantic Scholar Open Research Corpus~\cite{ammar18NAACL}, a dataset of over $39$ million research papers with authors and citations\footnote{Papers with fewer than $5$ citations or more than $10$ authors were excluded.}.
+A \emph{coauthorship complex}~\cite{patania2017} is a simplicial complex where a paper with $k$ authors is represented by a $(k-1)$-simplex (see the supplementary material for details).
+The added subsimplices of the $(k-1)$-simplex are interpreted as collaborations among subgroups of authors.
+We sampled two coauthorship complexes---CC1 and CC2, see Table~\ref{table:Simplices-coauthor} for statistics---from the Semantic Scholar Open Research Corpus~\cite{ammar18NAACL}, a dataset of over $39$ million research papers with authors and citations\footnote{We excluded papers with fewer than $5$ citations or more than $10$ authors.}.
 We believe the following procedure extracts representative papers from which one can construct coauthorship complexes: We performed random walks (of length $80$) on the vertices of the graph which correspond to papers, and edges connect papers sharing at least one author. The $k$-cochains are given by the number of shared citations of the given collaboration (see Figure~\ref{fig:data2complex} and~\ref{fig:bipartite}(b)-(c)).
 \paragraph{Method.}
 We evaluated the performance of the SNNs on the task of imputing missing data on the $k$-cochains (for $k=0,1,2$) of the extracted coauthorship complexes. As in a typical pipeline for this task~\cite{nelwamondo2007missing}, missing data is artificially introduced by replacing a portion of the values with a constant. Specifically, given a fixed coauthorship complex, missing data is introduced at random on the $k$-cochains at $4$ rates: $10\%,  20\%,  30\%$, and $50\%$. The training input is then given by the $k$-cochains on which the random missing data is substituted by the median of the known data (the median is perhaps a reasonable first guess for estimating missing data). We trained an SNN comprising $3$ layers with $30$ convolutional filters of degree $5$. We used the $L_1$ norm as the reconstruction loss over the known elements, and the Adam optimizer with a learning rate of $10^{-3}$. The SNN was trained for $1000$ iterations. We then tested the performance of the network on its accuracy in imputing missing data. As a statistical evaluation, we tested the network on different random samples of the damaged portions for the same percentage of missing value.
@@ -41,8 +42,9 @@ Figure~\ref{fig:accuracy-error} (a-b) shows the mean accuracy (MA) and absolute 
 As a second assessment, we evaluate how accurately an SNN trained on one coauthorship complex can impute missing citations on a different complex. Over the assumption that coauthorship complexes share a similar structure and the same data underlies the generating process of cochains.
 Figure~\ref{fig:transfer-learning} shows the MA in predicting missing citations on CC1 using the above architecture of SNN trained on CC2. Observe that the accuracy of the pretrained network on CC2 is comparable to the result shown in Figure~\ref{fig:accuracy-error}. We believe that this is expected in situations where the topological structure of the underlying complex is similar before and after transfer.
 
-Table~\ref{table:comparison-SNN} shows the performance of two statistical baselines: missing values inferred as the mean or median of all known values, and missing values inferred from the mean of $(k-1)$ and $(k+1)$ neighbors of the simplices ($k$-simplicial neighbor $k$-sn). SNNs well outperform these baselines.
-Comparison with other state-of-the-art imputation algorithms is left for future work.
+Table~\ref{table:comparison-SNN} shows the performance of two baselines: missing values inferred as (i) the mean or median of all known values, and (ii) the mean of the $(k-1)$ and $(k+1)$ neighboring simplices.
+SNNs well outperform these baselines.
+Comparison with stronger imputation algorithms is left for future work.
 
 \begin{figure}[htbp]
   \centering
@@ -50,21 +52,21 @@ Comparison with other state-of-the-art imputation algorithms is left for future 
   \caption{Mean Accuracy $\pm$ standard deviation over 5 samples in imputing missing citations on CC1 with an SNN trained on CC2.} \label{fig:transfer-learning}
 \end{figure}
 
-
-
-%\scriptsize{
 \begin{table}[htbp]
   \centering
   \scriptsize{
-  \begin{tabular}{lcccccc}
+  \begin{tabular}{lrrrrrr}
+    \toprule
     Method   & CC1 - dim 0   & CC1 - dim 1   & CC1 - dim 2   & CC2 - dim 0  & CC2 - dim 1  & CC2 - dim 2 \\
     \midrule
-   Global Mean & $3.30 \pm 0.82$ & $5.75\pm 1.28$  &$ 2.96\pm 0.49$  & $3.32 \pm 0.85$ & $8.31 \pm 1.03$  & $7.90\pm 0.35$\\
-    Global Median & $7.78 \pm 2.70$   & $10.44 \pm 1.00$ &$ 12.50 \pm 0.63 $ & $5.55 \pm 0.38 $&$ 6.28\pm 0.36  $&$ 6.06\pm 0.2$\\
-    $k$-sn & $11.88\pm 5.29 $& $24.15 \pm 1.85$ & $27.38 \pm 1.18  $& $16.45 \pm 1.83 $&$ 30.67\pm 2.13$   &$ 24.85 \pm 0.57 $\\
+    Global Mean & $3.30 \pm 0.82$ & $5.75\pm 1.28$  &$ 2.96\pm 0.49$  & $3.32 \pm 0.85$ & $8.31 \pm 1.03$  & $7.90\pm 0.35$\\
+    Global Median & $7.78 \pm 2.70$   & $10.44 \pm 1.00$ &$ 12.50 \pm 0.63 $ & $5.55 \pm 0.38 $&$ 6.28\pm 0.36  $&$ 6.06\pm 0.20$\\
+    Neighbors Mean & $11.88\pm 5.29 $& $24.15 \pm 1.85$ & $27.38 \pm 1.18  $& $16.45 \pm 1.83 $&$ 30.67\pm 2.13$   &$ 24.85 \pm 0.57 $\\
+    \bottomrule
   \end{tabular}}
-   \vspace{2pt}
+  \vspace{2pt}
   \caption{%
-      Performance of statistical baselines: MA $\pm$ standard deviation for $30\%$ of missing data over 5 samples.
+    Performance of baselines: Mean Accuracy $\pm$ standard deviation for $30\%$ missing data over 5 samples.
   }\label{table:comparison-SNN}
-\end{table}%}
+\end{table}
+
