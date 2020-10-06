@@ -35,9 +35,9 @@ Observe that this definition can be thought of in geometric terms: the support o
 \savebox{\tempbox}{
 \begin{tikzpicture}[font=\scriptsize] % Dirty last minute TikZ with calc cheating and hardcoding.
   \coordinate (b) at (0,0);
-  \coordinate (c) at ($ (b) +  (20:2) $);
-  \coordinate (a) at ($ (b) +  (80:2) $);
-  \coordinate (d) at ($ (c) +  (30:2) $);
+  \coordinate (c) at (3,0); %($ (b) + (20:2) $);
+  \coordinate (a) at (1.5,1.25); %($ (b) + (80:2) $);
+  \coordinate (d) at (4,0.7); %($ (c) + (30:2) $);
 
   \draw[twosimp] (a) -- (b) -- (c) -- cycle;
   \draw (a) -- (d) -- (c) -- cycle;
@@ -51,28 +51,30 @@ Observe that this definition can be thought of in geometric terms: the support o
   \draw (b) -- (c) node [midway,sloped,below] {$100$};
   \draw (c) -- (d) node [midway,sloped,below] {$4$};
   \draw (a) -- (d) node [midway,sloped,above] {$10$};
-  \node () at ($ (b) + (50:1.15) $) {$100$};
+  %\node () at ($ (b) + (50:1.15) $) {$100$};
+  \node () at (1.5,0.5) {$100$};
   
   \node[anchor=south west] at (a) {$160$};
   \node[anchor=south east] at (a) {$A$};
   
-  \node[anchor=north west] at (b) {$150$};
-  \node[anchor=east] at (b) {$B$};
+  \node[anchor=north] at (b) {$150$};
+  \node[anchor=south] at (b) {$B$};
 
   \node[anchor=north] at (c) {$104$};
   \node[anchor=south] at (c) {$C$};
 
-  \node[anchor=south] at (d) {$14$};
-  \node[anchor=north] at (d) {$D$};
+  \node[anchor=north] at (d) {$14$};
+  \node[anchor=south] at (d) {$D$};
 \end{tikzpicture}
 }%
 \settowidth{\tempwidth}{\usebox{\tempbox}}%
 \hfil\begin{minipage}[b]{\tempwidth}%
 \raisebox{-\height}{\usebox{\tempbox}}%
+\vspace{-3pt}
 \scriptsize{\captionof*{figure}{(b)}}%
 \label{fig:co-authoship-complex}%
 \end{minipage}%
-\vspace{5pt}
+%\vspace{5pt}
 %\end{table*}
 \savebox{\tempbox}{\scriptsize{
 \begin{blockarray}{cccccc}
@@ -88,6 +90,7 @@ Observe that this definition can be thought of in geometric terms: the support o
 \settowidth{\tempwidth}{\usebox{\tempbox}}%
 \hfil\begin{minipage}[b]{\tempwidth}%
 \raisebox{-\height}{\usebox{\tempbox}}%
+\vspace{-7pt}
 \scriptsize{\captionof*{figure}{(c)}}%
 \end{minipage}%
 
