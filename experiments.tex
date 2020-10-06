@@ -6,7 +6,8 @@ GNNs have recently proved to be a powerful tool for this task~\cite{spinelli2020
 With a view that our method incorporates additional higher-dimensional structure in the data, we evaluate the performance of the SNNs in imputing missing data over simplicial complexes.
 
 \paragraph{Data.}
-A \emph{coauthorship complex}~\cite{patania2017} is a simplicial complex where a paper with $k$ authors is represented by a $(k-1)$-simplex (see Figure~\ref{fig:data2complex} and the supplementary material for detailed definitions). The added subsimplices of the $k-1$-simplex are interpreted as collaborations among subgroups of authors.
+A \emph{coauthorship complex}~\cite{patania2017} is a simplicial complex where a paper with $k$ authors is represented by a $(k-1)$-simplex (see Figure~\ref{fig:data2complex} and the supplementary material for detailed definitions).
+The added subsimplices of the $(k-1)$-simplex are interpreted as collaborations among subgroups of authors.
 We sampled two coauthorship complexes---CC1 and CC2, see Table~\ref{table:Simplices-coauthor} for statistics---from the Semantic Scholar Open Research Corpus~\cite{ammar18NAACL}, a dataset of over $39$ million research papers with authors and citations\footnote{We excluded papers with fewer than $5$ citations or more than $10$ authors.}.
 We believe the following procedure extracts representative papers from which one can construct coauthorship complexes: We performed random walks (of length $80$) on the vertices of the graph which correspond to papers, and edges connect papers sharing at least one author. The $k$-cochains are given by the number of shared citations of the given collaboration (see Figure~\ref{fig:data2complex} and~\ref{fig:bipartite}(b)-(c)).
 \paragraph{Method.}
