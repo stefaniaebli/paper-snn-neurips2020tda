@@ -1,4 +1,4 @@
-\paragraph{Simplicial complexes.}
+\paragraph{Simplicial complexes.} 
 A \emph{simplicial complex} is a collection of finite sets closed under taking subsets.
 We call a member of a simplicial complex $K$ a \emph{simplex} of \emph{dimension $p$} if it has cardinality $p+1$, and denote the set of all such $p$-simplices $K_p$.
 A $p$-simplex has $p+1$ \emph{faces} of dimension $p-1$, namely the subsets omitting one element. We denote these $[v_0,\dotsc,\hat{v}_i,\dotsc, v_p]$ when omitting the $i$'th element.
@@ -62,11 +62,8 @@ Observe that this definition can be thought of in geometric terms: the support o
 \end{figure}
 
 \paragraph{Simplicial Laplacians.}
-We are in this paper concerned with finite abstract simplicial complexes, although our method is applicable to a much broader setting, e.g.\ CW-complexes. In analogy with Hodge--de Rham theory~\cite{madsen1997calculus}, we then define the \emph{degree-$i$ simplicial Laplacian} of a simplicial complex $K$ as the linear map $\lap_i:C^i(K)\to C^i(K)$ specified by
+We are in this paper concerned with finite abstract simplicial complexes, although our method is applicable to a much broader setting, e.g.\ CW-complexes. In analogy with Hodge--de Rham theory~\cite{madsen1997calculus}, we define the \emph{degree-$i$ simplicial Laplacian} of a simplicial complex $K$ as the linear map $\lap_i:C^i(K)\to C^i(K)$ specified by
 \begin{equation*}
   \lap_i = \lapu_i + \lapd_i = \delta^{i\ast}\circ\delta^{i} + \delta^{i-1}\circ\delta^{i-1\ast},
 \end{equation*}
-
-where $\delta^{i\ast}$ is the adjoint of the coboundary with respect to the inner product (typically the one making the indicator function basis orthonormal). In most practical applications, the coboundary can be represented as a sparse matrix $B_i$ and the Laplacians can be efficiently computed as $L_i=B_i\transpose B_{i}+B_{i-1}B_{i-1}\transpose$. The matrices $B_0$ and $L_0$ are the classic graph incidence matrix and Laplacian.
-
-Note that the Laplacians carry valuable topological information about the simplicial complex. In particular, the kernel of the $k$-Laplacian is isomorphic to the $k$-(co)homology of its associated simplicial complex~\cite{eckmann1944,horak2013spectra}.\footnote{In other words, the number of zero-eigenvalues tells us the number of $k$-dimensional holes.}
+where $\delta^{i\ast}$ is the adjoint of the coboundary with respect to the inner product (typically the one making the indicator function basis orthonormal). In most practical applications, the coboundary can be represented as a sparse matrix $B_i$ and the Laplacians can be efficiently computed as $L_i=B_i\transpose B_{i}+B_{i-1}B_{i-1}\transpose$. The matrices $L_0$ and $B_0$ are the classic graph Laplacian and incidence matrix. Note that the Laplacians carry valuable topological information about the complex: The kernel of the $k$-Laplacian is isomorphic to the $k$-(co)homology of its associated simplicial complex~\cite{eckmann1944,horak2013spectra}.\footnote{In other words, the number of zero-eigenvalues tells us the number of $k$-dimensional holes.}
