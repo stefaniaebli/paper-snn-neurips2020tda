@@ -1,20 +1,20 @@
 \paragraph{Simplicial convolution.}
 
-A convolutional layer is of the form $f\ast \varphi_W$, where $\ast$ denotes convolution, and $\varphi_W$ is a function
-\emph{with small support} parameterized by learnable weights $W$.
+A convolutional layer is of the form $\psi\circ(f\ast \varphi_W)$, where $\ast$ denotes convolution, $\varphi_W$ is a function
+\emph{with small support} parameterized by learnable weights $W$, and $\psi$ is some linearity.
 Typically, $\varphi_W$ is locally constant in a small spatial region, and is zero elsewhere. This formulation of CNNs lends itself to a spectral interpretation that we exploit to extend CNNs to a much more general setting.
 
 Following~\cite{defferrard2016convolutional} and motivated by the fact that the discrete Fourier transform of a real-valued function on an $n$-dimensional cubical grid coincides with its decomposition into a linear combination of the eigenfunctions of the graph Laplacian for that grid, we define the Fourier transform $\mathcal{F}_p: C^p(K) \to \mathbb{R}^{\lvert K_p \rvert}$ of real $p$-cochains on a simplicial complex with Laplacians $\mathcal{L}_p$ as $\mathcal{F}_p(c) = \left(\ip{c}{e_1}_p, \ip{c}{e_2}_p, \dotsc, \ip{c}{e_{\lvert K_p \rvert}}_p\right)$, where the $e_i$'s are the eigencochains of $\mathcal{L}_p$ ordered by eigenvalues $\lambda_1\leq\dotsm\leq\lambda_{\lvert K_p \rvert}$. The function $\mathcal{F}_p$ is invertible since $\mathcal{L}_p$ is diagonalizable; explicitly, if we write $U\diag(\Lambda)U\transpose$ for a normalized eigendecomposition, the orthonormal matrices $U$ and $U\transpose$ represent $\mathcal{F}\inv_p$ and $\mathcal{F}_p$, respectively. This is the foundation for Barbarossa's development of signal processing on simplicial complexes~\cite{barbarossa2018learning}.
 
 Recall that on the function classes for which it is defined, the classical Fourier transform satisfies $\mathcal{F}(f\ast g)=\mathcal{F}(f)\mathcal{F}(g)$, where the right-hand side denotes pointwise multiplication. This will be our definition of convolution in the simplicial setting. Indeed, for cochains $c,c'\in C^p(K)$ we \emph{define} their convolution as the cochain $c\ast_p c' = \mathcal{F}_p\inv\left(\mathcal{F}_p(c)\mathcal{F}_p(c')\right)$.
 
-Within this framework, we are led to define a \emph{simplicial convolutional layer} with input $p$-cochain $c$ and weights $W$ as being of the form $\mathcal{F}\inv_p(\varphi_W)\ast_p c$ for some as of yet unspecified $\varphi_W\in\mathbb{R}^{\lvert K_p \rvert}$. To ensure the central property that a convolutional layer be localizing, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
+Within this framework, we are led to define a \emph{simplicial convolutional layer} with input $p$-cochain $c$ and weights $W$ as being of the form $\psi\circ\left(\mathcal{F}\inv_p(\varphi_W)\ast_p c\right)$ for some as of yet unspecified $\varphi_W\in\mathbb{R}^{\lvert K_p \rvert}$. To ensure the central property that a convolutional layer be localizing, we demand that $\varphi_W$ be a low-degree polynomial in $\Lambda=(\lambda_1, \dotsc, \lambda_{\lvert K_p \rvert})$, namely
 \begin{equation*}
   \varphi_W = \sum_{i=0}^N W_i\Lambda^i = \sum_{i=0}^N W_i(\lambda^i_1, \lambda^i_2, \dotsc, \lambda^i_{\lvert K_p \rvert}),
 \end{equation*}
 for small $N$. In signal processing parlance, one would say that such a convolutional layer \emph{learns filters that are low-degree polynomials in the frequency domain}.
 
-The reason for restricting the filters to be these low-degree polynomials is best appreciated when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then
+The reason for restricting the filters to be these low-degree polynomials is best appreciated when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then (ignoring the nonlinearity $\psi$), 
 \begin{equation*}
   \mathcal{F}\inv_p(\varphi_W)\ast_p c = \sum_{i=0}^N W_iU\diag(\Lambda^i)U\transpose c = \sum_{i=0}^N W_i\left(U\diag(\Lambda)U\transpose\right)^i c = \sum_{i=0}^NW_iL^i_pc. %\label{eq:filter}
 \end{equation*}
