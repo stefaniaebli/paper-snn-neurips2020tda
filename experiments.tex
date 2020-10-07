@@ -19,7 +19,7 @@ As in a typical pipeline for this task~\cite{nelwamondo2007missing}, missing val
 Specifically, given a fixed coauthorship complex, missing data is introduced at random on the $k$-cochains at $4$ rates: $10\%, 20\%,  30\%$, and $50\%$.
 The SNN is given as input the $k$-cochains on which missing citations are substituted by the median of known citations (as a reasonable first guess) and is trained to minimize the $L_1$ norm over known citations.
 %\mdeff{Could be easier in math than text?}
-We trained SNNs made of $3$ layers with $30$ convolutional filters of degree $N=5$ for $1000$ iterations with the Adam optimizer and a learning rate of $10^{-3}$.
+We trained SNNs with Leaky ReLu nonlinearity made of $3$ layers with $30$ convolutional filters of degree $N=5$ for $1000$ iterations with the Adam optimizer and a learning rate of $10^{-3}$.
 
 \paragraph{Results.}
 Figure~\ref{fig:accuracy-error} shows the mean accuracy and absolute error distribution (see the supplementary material for definitions) of the SNN in inputing missing citations on CC1. Observe that the distribution of the prediction error accumulates close to zero.
