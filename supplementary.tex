@@ -144,7 +144,7 @@ See Figure~\ref{fig:bipartite}.
 
 \paragraph{Sampling papers.}
 From the Semantic Scholar Open Research Corpus~\cite{ammar18NAACL}, we excluded papers with fewer than $5$ citations or more than $10$ authors.
-To sample a CC, we sampled $80$ papers (corresponding to maximal simplices in the CC) by performing a random walk (of length $80$) on the graph whose vertices represent papers and edges connect papers sharing at least one author.
+To sample a CC, we sampled $80$ papers (corresponding to maximal simplices in the CC) by performing a random walk (of length $80$, from a randomly chosen starting paper) on the graph whose vertices represent papers and edges connect papers sharing at least one author.
 
 \paragraph{Mean accuracy and absolute error.}
 A missing value is considered to be correctly imputed if the imputed value differs by at most $10\%$ from the true value.
