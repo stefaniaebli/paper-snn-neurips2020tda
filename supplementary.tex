@@ -11,14 +11,91 @@ See Figure~\ref{fig:bipartite}.
 
 \begin{figure}[htpb]
 %\begin{table*}[!t]
-\savebox{\tempbox}{\includegraphics[height=2.3cm]{./figures/bipartite.pdf}}%
+\savebox{\tempbox}{
+
+  \begin{tikzpicture}[font=\scriptsize]
+    \coordinate (I) at (0,0);
+    \coordinate (II) at (0,-0.5);
+    \coordinate (III) at (0,-1);
+    \coordinate (IV) at (0,-1.5);
+
+    \coordinate (A) at ($ (I) + (2,0) $);
+    \coordinate (B) at ($ (II) + (2,0) $);
+    \coordinate (C) at ($ (III) + (2,0) $);
+    \coordinate (D) at ($ (IV) + (2,0) $);
+
+    \fill[color=black] (I) circle (2pt);
+    \fill[color=black] (II) circle (2pt);
+    \fill[color=black] (III) circle (2pt);
+    \fill[color=black] (IV) circle (2pt);
+    \fill[color=black] (A) circle (2pt);
+    \fill[color=black] (B) circle (2pt);
+    \fill[color=black] (C) circle (2pt);
+    \fill[color=black] (D) circle (2pt);
+
+    \node[anchor=east] at (I) {Paper \MakeUppercase{\romannumeral 1}, $100$ citations};
+    \node[anchor=east] at (II) {Paper \MakeUppercase{\romannumeral 2}, $50$ citations};
+    \node[anchor=east] at (III) {Paper \MakeUppercase{\romannumeral 3}, $10$ citations};
+    \node[anchor=east] at (IV) {Paper \MakeUppercase{\romannumeral 3}, $4$ citations};
+
+    \node[anchor=west] at (A) {Author $A$};
+    \node[anchor=west] at (B) {Author $B$};
+    \node[anchor=west] at (C) {Author $C$};
+    \node[anchor=west] at (D) {Author $D$};
+
+    \draw (I) -- (A);
+    \draw (I) -- (B);
+    \draw (I) -- (C);
+
+    \draw (II) -- (A);
+    \draw (II) -- (B);
+
+    \draw (III) -- (A);
+    \draw (III) -- (D);
+
+    \draw (IV) -- (C);
+    \draw (IV) -- (D);
+  \end{tikzpicture}
+  
+}%
 \settowidth{\tempwidth}{\usebox{\tempbox}}%
 \hfil\begin{minipage}[b]{\tempwidth}%
 \raisebox{-\height}{\usebox{\tempbox}}%
 %\vspace{-7pt}
 \scriptsize{\caption*{(a)}}%
 \end{minipage}%
-\savebox{\tempbox}{\includegraphics[height=2.4cm]{./figures/cochain.pdf}}%
+\savebox{\tempbox}{
+
+  \begin{tikzpicture}[font=\scriptsize]
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (2,0);
+
+    \coordinate (C) at ($ (A) + (300:1) $);
+    \node[anchor=north] at (C) {$100$};
+
+    \coordinate (D) at ($ (B) + (240:1) $);
+    \node[anchor=north] at (D) {$50$};
+
+    \draw[dashed] (A) -- (C) -- (B);
+    \draw[dashed] (A) -- (D) -- (B);
+
+
+    \coordinate (AA) at ($ (A) + (0, -1.5) $);
+    \coordinate (BB) at ($ (B) + (0, -1.5) $);
+   
+    \fill[color=black] (A) circle (2pt);
+    \fill[color=black] (B) circle (2pt);
+    \fill[color=black] (AA) circle (2pt);
+    \fill[color=black] (BB) circle (2pt);
+
+    \draw (A) -- (B);
+    \draw (AA) -- node[below, align=center] {$1$-cochain\\ $150=100+50$} (BB);
+
+ 
+  \end{tikzpicture}
+ 
+
+}%
 \settowidth{\tempwidth}{\usebox{\tempbox}}%
 \hfil\begin{minipage}[b]{\tempwidth}%
 \raisebox{-\height}{\usebox{\tempbox}}%
