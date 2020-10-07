@@ -17,15 +17,11 @@ Figure~\ref{fig:accuracy-error} (a-b) shows the mean accuracy (MA) and absolute 
 
 \begin{figure}[htbp]
   \centering
-  \makebox[\textwidth][c]{
-  \hspace{-15pt}
-  \includegraphics{figures/foo.pdf}
-  \hspace{-12pt}
-  \includegraphics{figures/foo-2.pdf} }
-\caption{\textbf{Left:} Mean Accuracy $\pm$ standard deviation over 5 samples of SNN in imputing missing citations on CC1. \textbf{Right:} Absolute Error Distribution over 1 sample for $40\%$ missing values in CC1.}
-\label{fig:accuracy-error}
+  \includegraphics[height=2.7cm]{figures/foo.pdf}
+  \hfill
+  \includegraphics[height=2.7cm]{figures/foo-2.pdf}
+  \caption{\textbf{Left:} mean accuracy $\pm$ standard deviation over 5 samples of SNN in imputing missing citations on CC1. \textbf{Right:} absolute error distribution over 1 sample for $40\%$ missing values in CC1.}\label{fig:accuracy-error}
 \end{figure}
-
 
 As a second assessment, we evaluate how accurately an SNN trained on one coauthorship complex can impute missing citations on a different complex. This is motivated by the assumption that coauthorship complexes share a similar structure and the same data underlies the generating process of cochains. We find that the accuracy is almost exactly as in Figure~\ref{fig:accuracy-error} (see Figure~\ref{fig:transfer-learning} in the supplementary material). We believe that this is expected in situations where the topological structure of the underlying complex is similar before and after transfer.
 
