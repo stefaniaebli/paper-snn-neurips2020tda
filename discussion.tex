@@ -1,12 +1,10 @@
 \section{Conclusion and future work}
 
-We introduced a mathematical framework to design neural networks based on a simplicial complex and provided preliminary results on their ability to impute missing data.
-We believe that SNNs can provide a suitable analytic method for data that is intrinsically structured to represent $n$-fold interactions.
-Our future work will focus on two computational directions:  i) applying the SNNs to vector field data ii) comparing the results with state of the art imputations algorithms, as in~\cite{spinelli2020neural}.
-In parallel, on the theoretical side we will investigate the following two problems: i) generalizing the processes of coarsening and pooling to SNNs. ii) studying the expressive power of SNNs as in~\cite{morris2019weisfeiler}. 
-%The first point will involve developing an efficient higher dimensional clustering algorithm for coarsening and to find a meaningful rearrangement of the clustered $k$-simplices for an efficient pooling.
-%\mdeff{I would be less specific.}\stefania{I agree. I have commented the last 2 sentences.}
+We introduced a mathematical framework to design neural networks for data that live on simplicial complexes and provided preliminary results on their ability to impute missing data.
+%We believe that SNNs provide a suitable analytic method for data that is intrinsically structured to represent $n$-fold interactions \mdeff{Empty sentence. And conclusion should be short.}
+Future work might include: (i) comparing SNNs with state-of-the-art imputation algorithms, (ii) using SNNs to solve vector field problems, (iii) generalizing coarsening and pooling to simplicial complexes, and (iv) studying the expressive power of SNNs.
+% as in~\cite{morris2019weisfeiler}. \mdeff{there's many papers}
 
+% \mdeff{Larger outlook -> must leave an impression.}
 Unrelated to the simplicial nature of this work, we would like to emphasize the way that the spectral language was key to developing and even formulating our method. In the same way that this view has often proven itself highly useful in extracting the important features of certain kinds of data (cf.\ the discipline of image compression), we believe it is underutilized in machine learning.
-Similarly, we wish to extend our method beyond Fourier-based filters, and wonder if there are gains to be had by for example wavelet filters, and whether they are natural in the context of simplicial complexes.
-%\mdeff{Wavelet filters can be expressed/learned in the current formalism.}
+%Similarly, we wish to extend our method beyond Fourier-based filters, and wonder if there are gains to be had by for example wavelet filters, and whether they are natural in the context of simplicial complexes.
