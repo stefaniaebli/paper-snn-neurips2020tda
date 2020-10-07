@@ -1,16 +1,15 @@
 \section{Experimental results}
 
-%\paragraph{Task/Problem.}
-As many real-world datasets contain missing values, missing data imputation has been a popular problem to tackle in statistics and machine learning~\cite{little1986statistical, nelwamondo2007missing}.
-GNNs have recently proved to be a powerful tool for this task~\cite{spinelli2020neural}.
-With a view that our method incorporates additional higher-dimensional structure in the data, we evaluate the performance of the SNNs in imputing missing data over simplicial complexes.
+As many real-world datasets contain missing values, missing data imputation is an important problem in statistics and machine learning~\cite{little1986statistical, nelwamondo2007missing}.
+Leveraging the structure underlying the data, GNNs have recently proved to be a powerful tool for this task~\cite{spinelli2020neural}.
+Extending this view to higher-dimensional structure, we evaluate the performance of SNNs in imputing missing data over simplicial complexes.
 
 \paragraph{Data.}
 A \emph{coauthorship complex (CC)}~\cite{patania2017} is a simplicial complex where a paper with $k$ authors is represented by a $(k-1)$-simplex.
-The added subsimplices of the $(k-1)$-simplex are interpreted as collaborations among subgroups of authors---a natural hierarchical representation that would be missed by the hypergraph representation of papers as hyperedges between authors.
-In general, a simplicial complex representing $n$-fold interactions (e.g.\ between authors) can be constructed as the one-mode projection of a multipartite graph (e.g.\ a paper-author bipartite graph) (see the supplementary material).
-The $k$-cochains are given by the number of shared citations of the given collaboration.
-See Figure~\ref{fig:data2complex} and~\ref{fig:bipartite}.
+The added subsimplices of the $(k-1)$-simplex are interpreted as collaborations among subsets of authors---a natural hierarchical representation that would be missed by the hypergraph representation of papers as hyperedges between authors.
+In general, a simplicial complex representing $n$-fold interactions (e.g.\ between authors) can be constructed as the one-mode projection of a multipartite graph (e.g.\ a paper-author bipartite graph).
+The $(k-1)$-cochains are given by the number of citations attributed to the given collaborations of $k$ authors.
+See Figure~\ref{fig:data2complex} and~\ref{fig:bipartite}, and the supplementary material for details.
 We sampled (see the supplementary material) two coauthorship complexes---CC1 and CC2, see Table~\ref{table:Simplices-coauthor} for statistics---from the Semantic Scholar Open Research Corpus~\cite{ammar18NAACL}, a dataset of over $39$ million research papers with authors and citations.
 
 \paragraph{Method.}
@@ -19,7 +18,7 @@ As in a typical pipeline for this task~\cite{nelwamondo2007missing}, missing val
 Specifically, given a fixed coauthorship complex, missing data is introduced at random on the $k$-cochains at $4$ rates: $10\%, 20\%,  30\%$, and $50\%$.
 The SNN is given as input the $k$-cochains on which missing citations are substituted by the median of known citations (as a reasonable first guess) and is trained to minimize the $L_1$ norm over known citations.
 %\mdeff{Could be easier in math than text?}
-We trained SNNs with Leaky ReLu nonlinearity made of $3$ layers with $30$ convolutional filters of degree $N=5$ for $1000$ iterations with the Adam optimizer and a learning rate of $10^{-3}$.
+We trained SNNs made of $3$ layers with $30$ convolutional filters of degree $N=5$ with Leaky ReLu for $1000$ iterations with the Adam optimizer and a learning rate of $10^{-3}$.
 
 \paragraph{Results.}
 Figure~\ref{fig:accuracy-error} shows the mean accuracy and absolute error distribution (see the supplementary material for definitions) of the SNN in inputing missing citations on CC1. Observe that the distribution of the prediction error accumulates close to zero.
