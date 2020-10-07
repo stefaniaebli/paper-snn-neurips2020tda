@@ -1,10 +1,13 @@
-\section{Supplementary material}\label{sec:supp_material}
+\section{Supplementary material}
 
 \paragraph{Simplicial distance and the localizing property of the Laplacian.}
 Suppose that $\sigma$ and $\tau$ are $p$-simplices for which $(\nu_0, \nu_1, \dotsc, \nu_d)$ is the shortest sequence of $p$-simplices with the property that $\nu_0=\sigma$, $\nu_d=\tau$, and each $\nu_i$ shares a face or a coface with $\nu_{i-1}$, and a face or a coface with $\nu_{i+1}$. We say that $d$ is the \emph{simplicial distance} between $\sigma$ and $\tau$. Then for all $N<d$, the entry of $L_p^N$ corresponding to $\sigma$ and $\tau$ is $0$, and so the filter does not cause interaction between $c(\sigma)$ and $c(\tau)$. This is analogous to a size-$d$ ordinary CNN layer not distributing information between pixels that are more than $d$ pixels apart. We will refer to $N$ as the \emph{degree} of the convolutional layer, but one may well wish to keep in mind the notion of \emph{size} from traditional CNNs.
 
-\paragraph{Coauthorship complexes.}
-Given a set of papers with their respective authors, a coauthorships complex is built by adding a $(k-1)$-simplex for each paper with $k$ authors. Differently from hypergraphs, simplicial complexes are closed under subsets. This means that when one adds a $(k-1)$-simplex all its subsimplices are included. The added subsimplices represent collaborations among subgroups of the authors in writing the same paper. For this reason simplicial complexes seem the natural mathematical framework to encode $n$-fold interactions. In a more general setting, a simplicial complex representing $n$-fold interactions can be constructed as the one-mode projection of a bipartite graph. Namely, given a bipartite graph $X$-$Y$, the simplicial projection on $Y$ is the simplicial complex whose $(k-1)$-simplices are sets of $k$ neighboring vertices in $Y$. For example, our coauthorships complexes are constructed as simplicial projections of the paper-author bipartite graph (see Figure~\ref{fig:bipartite}). In this setting, cochains on the simplicial projection come naturally from weights on $X$. Specifically, given any $(k-1)$-simplex $[y_1,\dots,y_k]$ and its neighbor vertices $\{x_1,\dots,x_j\}\subseteq X$ one can define a $k$-cochain as $\phi(\{x_1,\dots,x_j\})$, for any function $\phi: \mathcal{P(X)}\longrightarrow \RR $. In our case, the function is the sum and the wights are given by the number of citations (see Figure~\ref{fig:bipartite}).
+\paragraph{Simplicial complexes as the projections of bipartite graphs.}
+Given a bipartite graph $X$-$Y$, the simplicial projection on $Y$ is the simplicial complex whose $(k-1)$-simplices are the sets of $k$ vertices in $Y$ that have at least one common neighbor in $X$.
+Cochains on the simplicial projection are naturally given by weights on $X$: Given any $(k-1)$-simplex $[y_1,\dots,y_k]$ and its neighboring vertices $\{x_1,\dots,x_j\}\subseteq X$, one can define a $(k-1)$-cochain as $\phi(\{x_1,\dots,x_j\})$, for any function $\phi: \mathcal{P(X)}\to\RR$.
+In our coauthorship application, $\phi$ is the sum and the weight of a paper is the number of times it is cited.
+See Figure~\ref{fig:bipartite}.
 
 \begin{figure}[htpb]
 %\begin{table*}[!t]
@@ -30,9 +33,14 @@ Given a set of papers with their respective authors, a coauthorships complex is 
 \scriptsize{\captionof*{figure}{(c)}}%
 \end{minipage}%
 %\end{table*}
-\caption{Constructing a simplicial complex and its cochain from a bipartite graph. (a) Paper-author bipartite graph using the data of Figure~\ref{fig:data2complex}. (b)The $2$-simplex $[A,B]$ is included in the coauthorship complex sinece $A$ and $B$ are $2$ neighbor. The cochain on $[A,B]$ is given by the sum of the citations on the neighboring papers. (c) Co-authorship complex with cochains built from the citations on papers.}\label{fig:bipartite}
+\caption{%
+    Constructing a simplicial complex and its cochain from a bipartite graph.
+    (a)~Paper-author bipartite graph (same data as in Figure~\ref{fig:data2complex}).
+    (b)~The $1$-simplex $[A,B]$ is included in the coauthorship complex since authors $A$ and $B$ collaborated.
+    The cochain on $[A,B]$ is given by the sum of their common papers' citations.
+    (c)~Resulting coauthorship complex with cochains.
+}\label{fig:bipartite}
 \end{figure}
-
 
 \begin{table}[htbp]
   \centering
@@ -51,17 +59,11 @@ Given a set of papers with their respective authors, a coauthorships complex is 
   } \label{table:Simplices-coauthor}
 \end{table}
 
+\paragraph{Sampling papers.}
+From the Semantic Scholar Open Research Corpus~\cite{ammar18NAACL}, we excluded papers with fewer than $5$ citations or more than $10$ authors.
+To sample a CC, we sampled $80$ papers (corresponding to \mdeff{top-dimensional/maximal, what's the term?} simplices in the CC) by performing a random walk (of length $80$) on the graph whose vertices represent papers and edges connect papers sharing at least one author.
 
-
-\paragraph{Missing data imputation.}
-We state here some definitions and criteria that are used in the results section.
-A missing value is predicted correctly if the imputed value differs of at most of $10\%$ from the actual values. The \emph{accuracy} is defined as the percentage of missing values that has been correctly imputed and the \emph{absolute error} (AE) as the magnitude of the difference between the predicted and actual citation.
-For the same percentage of missing values we consider different random samples of the damaged portions. Then a statistical evaluation of the performance of the network is given by the \emph{mean accuracy} (MA), the mean of the accuracy over different samples.
-
-\paragraph{Transfer learning result.} Figure~\ref{fig:transfer-learning} shows that the accuracy of the SNN when imputing values on CC1 after having been trained on CC2 is very close to the accuracy obtained without transfer learning (cf.\ Figure~\ref{fig:accuracy-error}).
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics{figures/foo-transfer.pdf}
-  \caption{Mean Accuracy $\pm$ standard deviation over 5 samples in imputing missing citations on CC1 with an SNN trained on CC2.} \label{fig:transfer-learning}
-\end{figure}
+\paragraph{Mean accuracy and absolute error.}
+A missing value is considered to be correctly imputed if the imputed value differs by at most $10\%$ from the true value.
+The \emph{accuracy} is the percentage of missing values that has been correctly imputed and the \emph{absolute error} is the magnitude of the difference between the imputed and true value.
+For each rate of missing values, we compute the \emph{mean accuracy} $\pm$ standard deviation over 5 samples with randomly damaged portions.

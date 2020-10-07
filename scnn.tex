@@ -22,7 +22,7 @@ This is important for three reasons, like for traditional CNNs.
 First, the convolution can be efficiently implemented by $N$ sparse matrix-vector multiplications: This reduces the computational complexity from $\mathcal{O}(\lvert K_p\rvert^2)$ to $\mathcal{O}(\xi\lvert K_p\rvert)$ where $\xi$ is the density factor.
 Second, the number of weights to be learned is reduced from $\mathcal{O}(\lvert K_p\rvert)$ to $\mathcal{O}(1)$.
 Third, the operation is $N$-localizing in the sense that if two simplices $\sigma,\tau$ are more than $N$ hops apart, then a degree-$N$ convolutional layer does not cause interaction between $c(\sigma)$ and $c(\tau)$ in its output (see the supplementary material).
-Those local interactions (in the spatial domain) can be interpreted as message-passing~\cite{gilmer2017NeuralMP}
+Those local interactions (in the spatial domain) can be interpreted as message-passing between simplices~\cite{gilmer2017NeuralMP}.
 
 %In practice we implement \refeq{filter} using Chebyshev polynomials, as suggested for GNNs in~\cite{defferrard2016convolutional}.
 %\mdeff{Not very important: The choice of polynomial (monomials, Chebyshev, Legendre, etc.) doesn't make much difference in practice.}
