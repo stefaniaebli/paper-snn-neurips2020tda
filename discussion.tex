@@ -8,6 +8,35 @@ Future work might include:
 (iv) using boundaries and coboundaries to mix data structured by relationships of different dimensions,
 and (v) studying the expressive power of SNNs.
 
+In the same way as the spectral language helped to solve PDEs by diagonalizing them
+
 % \mdeff{Larger outlook -> must leave an impression.}
-Unrelated to the simplicial nature of this work, we would like to emphasize the way that the spectral language was key to developing and even formulating our method. In the same way that this view has often proven itself highly useful in extracting the important features of certain kinds of data (cf.\ the discipline of image compression), we believe it is underutilized in machine learning.
+Unrelated to the simplicial nature of this work, we would like to emphasize the way that the spectral language was key to developing and even formulating our method:
+Viewing convolution as a multiplication in the spectral domain allows a meaningful generalization of filtering to domains who lack a symmetry group. % which have not meaningful conv
+A powerful aspect of that view
+While filters are the most general shift-invariant (equivariant to symmetry group action) linear operators in the classical theory, their expressive power remains to be studied in the absense of symmetry.
+no symmetry but automorphism group 
+% on which one cannot meaningfully move/translate data
+
+% generality of spaces/graphs/complexes: homogeneous ⊂ some automorphisms ⊂ asymmetric
+% (homogeneous == every point can be transformed into every other point by some automorphism)
+The spectral language was key to generalize (intuition why defining filtering in this way) filtering to non-homogeneous spaces, where filters cannot be "moved/translated/shifted"---but only \emph{localized}.
+where convolutions can't be defined trough the inner-product with "moved/translated/shifted" filters, as there's no notion of shift (=no symmetry group).
+Convolutions are hence defined as the inner-product with localized filters $g(L)\delta_i$ (what does that mean?).
+% would need to write more about localization
+% isometry invariance?
+% does anisotropy mean anything in the total absence of symmetries?
+
+Most general linear maps in the absence of automorphisms, but at the price of (some?) anisotropy otherwise.
+%which might however not be important in practice.
+
+hence have no natural shift operator
+their last generalization from groups or homogeneous spaces to (asymmetric) graphs and complexes.
+Finally, filters are the most general shift-invariant linear operators
+classical theory
+
+%In the same way that this view has often proven itself highly useful in extracting the important features of certain kinds of data (cf.\ the discipline of image compression), we believe it is underutilized in machine learning.
+
+An idea is that the spectral language is powerful because it allows to easily exploit the symmetries of the domain. Make the link to the study of expressive power, because filters are the most general linear operators that commute with the action of the symmetry group, equivariance to group action <=> conv [Kondor et al., though I think this must have been known before]. And maybe to PDEs: the Laplacian appears in many physical systems (as a property of space), and the solution to those are functions of the Laplacian applied to the initial conditions (i.e., filters).
+
 %Similarly, we wish to extend our method beyond Fourier-based filters, and wonder if there are gains to be had by for example wavelet filters, and whether they are natural in the context of simplicial complexes.
