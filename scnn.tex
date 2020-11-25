@@ -12,7 +12,7 @@ where the $e_i$'s are the eigencochains of $\mathcal{L}_p$ ordered by eigenvalue
 
 Recall that on the function classes for which it is defined, the classical Fourier transform satisfies $\mathcal{F}(f\ast g)=\mathcal{F}(f)\mathcal{F}(g)$, where the right-hand side denotes pointwise multiplication. This will be our definition of convolution in the simplicial setting. Indeed, for cochains $c,c'\in C^p(K)$ we \emph{define} their convolution as the cochain
 \begin{equation*}
-  c\ast_p c' = \mathcal{F}_p\inv\left(\mathcal{F}_p(c)\mathcal{F}_p(c')\right). 
+  c\ast_p c' = \mathcal{F}_p\inv\left(\mathcal{F}_p(c)\mathcal{F}_p(c')\right).
 \end{equation*}
 
 Within this framework, we are led to define a \emph{simplicial convolutional layer} with input $p$-cochain $c$ and weights $W$ as being of the form
@@ -25,7 +25,7 @@ for some as of yet unspecified $\varphi_W\in\mathbb{R}^{\lvert K_p \rvert}$. To 
 \end{equation*}
 for small $N$. In signal processing parlance, one would say that such a convolutional layer \emph{learns filters that are low-degree polynomials in the frequency domain}.
 
-The reason for restricting the filters to be these low-degree polynomials is best appreciated when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then (ignoring the nonlinearity $\psi$), 
+The reason for restricting the filters to be these low-degree polynomials is best appreciated when writing out the convolutional layer in a basis. Let $L^i_p$ denote the $i$'th power of the matrix for $\mathcal{L}_p$ in, say, the standard basis for $C^p(K)$, and similarly for $c$. Then (ignoring $\psi$),
 \begin{equation*}
   \mathcal{F}\inv_p(\varphi_W)\ast_p c = \sum_{i=0}^N W_iU\diag(\Lambda^i)U\transpose c = \sum_{i=0}^N W_i\left(U\diag(\Lambda)U\transpose\right)^i c = \sum_{i=0}^NW_iL^i_pc. %\label{eq:filter}
 \end{equation*}
