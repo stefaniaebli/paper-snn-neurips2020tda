@@ -1,0 +1,33 @@
+\begin{tikzpicture}[font=\scriptsize] % Dirty last minute TikZ with calc cheating and hardcoding.
+  \coordinate (b) at (0,0);
+  \coordinate (c) at (12,0); %($ (b) + (20:2) $);
+  \coordinate (a) at (6,6); %($ (b) + (80:2) $);
+  \coordinate (d) at (13.8,6.8); %($ (c) + (30:2) $);
+
+  \draw[twosimp] (a) -- (b) -- (c) -- cycle;
+  \draw (a) -- (d) -- (c) -- cycle;
+  \fill[color=black] (a) circle (6pt);
+  \fill[color=black] (b) circle (6pt);
+  \fill[color=black] (c) circle (6pt);
+  \fill[color=black] (d) circle (6pt);
+
+  \draw (a) -- (b) node [midway,sloped,above] {\large $150$};
+  \draw (a) -- (c) node [midway,sloped,above] {\large $100$};
+  \draw (b) -- (c) node [midway,sloped,below] {\large $100$};
+  \draw (c) -- (d) node [midway,sloped,below] {\large $4$};
+  \draw (a) -- (d) node [midway,sloped,above] {\large $10$};
+  %\node () at ($ (b) + (50:1.15) $) {$100$};
+  \node () at (5.5,3.2) {\large $100$};
+  
+  \node[anchor=south west] at (a) {\large $160$};
+  \node[anchor=south east] at (a) {\large $A$};
+  
+  \node[anchor=north] at (b) {\large $150$};
+  \node[anchor=south] at (b) {\large $B$};
+
+  \node[anchor=north] at (c) {\large $104$};
+  \node[anchor=south west ] at (c) {\large $C$};
+
+  \node[anchor=north west] at (d) {\large $14$};
+  \node[anchor=south] at (d) {\large $D$};
+\end{tikzpicture}
