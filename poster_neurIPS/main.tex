@@ -1,4 +1,4 @@
-\documentclass[landscape,a0paper,blockverticalspace = 7mm]{tikzposter}
+\documentclass[landscape,a0paper,blockverticalspace = 5mm]{tikzposter}
 
 \usepackage[english]{babel}
 \usepackage{amsmath, amsfonts}
@@ -285,7 +285,7 @@
     }
   \block{Basic building blocks of a space: simplices}{
 		\begin{center}
-		\vspace{-0.5cm}
+		\vspace{-0.4cm}
 		 \begin{minipage}{0.2\linewidth}
 		 \begin{center}
           \includegraphics[height=0.5cm]{figures/simp0.png}
@@ -345,31 +345,32 @@
   
    
   \block{Simplicial Neural Networks}{
-    
+    \vspace{-0.5cm}
  \begin{center}
 \Large{\textbf{Laplacians for simplicial complexes}}
 \end{center}
-The graph Laplacian can be extended to Laplacians for simplices of any dimension $k$ \cite{2}. The $k$-Laplacian can be interpreted as a function propagating the values of the $k$-cochains, $y_k$, on the $k$-simplices.
+\vspace{-0.2cm}
+The graph Laplacian can be extended to Laplacians for simplices of any dimension $k$ \cite{1}. The $k$-Laplacian can be interpreted as a function propagating values of functions on the $k$-simplices. These functions are called $k$-cochains, $x_k$.
 \vspace{0.3cm}
       \begin{center}
       
       \begin{minipage}{0.2\linewidth}
 		\begin{center}
-		 $\mathcal{L_0}$: Graph Laplacian\\
-		$y_0=\mathcal{L_0}x_0$
+		 $L_0$: Graph Laplacian\\
+		$y_0=L_0x_0$
 	\end{center}		       
       
       \end{minipage}\hspace{4.5cm}
       \begin{minipage}{0.2\linewidth}
          \begin{center}
-		  $\mathcal{L_1}$: $1$-Laplacian\\
-		$y_1=\mathcal{L_1}x_1$
+		  $L_1$: $1$-Laplacian\\
+		$y_1=L_1x_1$
 	\end{center}
       \end{minipage} \hspace{4.5cm}
 	\begin{minipage}{0.2\linewidth}
          \begin{center}
-		 $\mathcal{L_2}$: $2$-Laplacian\\
-		$y_2=\mathcal{L_2}x_2$
+		 $L_2$: $2$-Laplacian\\
+		$y_2=L_2x_2$
 	\end{center}
       \end{minipage} 
       
@@ -406,30 +407,31 @@ The graph Laplacian can be extended to Laplacians for simplices of any dimension
 
 
  \begin{center} 
+\vspace{-1.5cm}
 \Large{\textbf{Simplicial Neural Networks (SNNs)}}
 \end{center}
-\vspace{0.3cm}
-In SNNs the convolutional filters are low-degree polynomials in the Laplacian with learnable coefficients.
+\vspace{-0.5cm}
+\begin{itemize}
+\item The convolutional filters are low-degree polynomials in the Laplacian with learnable coefficients.
+\item The input are multiple $k$-cochains on the $k$-simplices, $W_k$.
+\end{itemize}
+ 
 %, $\sum_{d=0}^{m}\theta_k^d\mathcal{L_k}^dx_k$, where $\theta_k^d$ are the learnable parameters and $x_k$ is the input value on the $k$-simplices. 
-These polynomial can be interpreted as functions propagating the values of the $k$-cochains at a distance not greater than their degree.
 
-
-\vspace{0.3cm}
-
-      \begin{center}
-          \includegraphics[height=10cm]{figures/net.png}
+    \begin{center}
+          \includegraphics[height=15cm]{figures/nets.pdf}
           \end{center}
 
 \begin{enumerate}
-
-\item Convolution can be implemented by $N$ sparse matrix-vector multiplications: the computational cost is $\mathcal{O}(\xi\lvert K_p\rvert)$.
-\item The number of weights to be learned is reduced from $\mathcal{O}(\lvert K_p\rvert)$ to $\mathcal{O}(1)$.
+\vspace{-2cm}
+\item Convolution can be implemented by $N$ sparse matrix-vector multiplications: the computational cost is $\mathcal{O}(\xi\lvert W_k\rvert)$.
+\item The number of weights to be learned is reduced from $\mathcal{O}(\lvert W_k\rvert)$ to $\mathcal{O}(1)$.
 \item The operation is $N$-localizing: if two simplices are more than $N$ hops apart, there is no interaction between them.
 \end{enumerate}
 
     }    
     
-    
+   
   
 
   }
@@ -539,7 +541,10 @@ These polynomial can be interpreted as functions propagating the values of the $
 
     \block{Imputing missing citations on the coauthoship complex}{
 \begin{center}
-Coautorship complexes were built from the Semantic Scholar dataset \cite{3} where missing citations are introduced at random on the $k$-cochains ($k=1,2,3$) at four rates: $10\%, 20\%,  30\%$, and $50\%$.
+\Large{\textbf{Data}}
+\end{center}
+\begin{center}
+Coautorship complexes were built from the Semantic Scholar dataset \cite{2} where missing citations are introduced at random on the $k$-cochains ($k=1,2,3$) at four rates: $10\%, 20\%,  30\%$, and $50\%$.
 
 \end{center}
 \vspace{0.5cm}
@@ -599,7 +604,7 @@ Performance of baselines: mean accuracy $\pm$ standard deviation over 5 samples 
 \small
 \begin{thebibliography}{1}
 
-\bibitem{gnn} M.\ Defferrard, X.\ Bresson, and P.\ Vandergheynst, {\em Convolutional neural networks on graphs with fast localized spectral filtering}, Adv.\ in NeurIPS, 2016.
+
 \bibitem{hor} D.\ Horak and J.\ Jost, {\em Spectra of combinatorial Laplace operators on 
   simplicial complexes}, Adv.\ in Math.\, 2013.
 \bibitem{sem} W.\ Ammar et al.\ , {\em Construction of the Literature Graph in Semantic Scholar}, \url{https://www.semanticscholar.org/paper/09e3cf5704bcb16e6657f6ceed70e93373a54618}.
