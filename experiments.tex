@@ -15,7 +15,7 @@ We sampled (see the supplementary material) two coauthorship complexes---CC1 and
 \paragraph{Method.}
 We evaluated the performance of the SNNs on the task of imputing missing citations on the $k$-cochains (for $k=0,1,2$) of the extracted coauthorship complexes.
 As in a typical pipeline for this task~\cite{nelwamondo2007missing}, missing values are artificially introduced by replacing a portion of the values with a constant.
-Specifically, given a fixed coauthorship complex, missing data is introduced at random on the $k$-cochains at $4$ rates: $10\%, 20\%,  30\%$, and $50\%$.
+Specifically, given a fixed coauthorship complex, missing data is introduced at random on the $k$-cochains at $5$ rates: $10\%, 20\%,  30\% ,40\%$, and $50\%$.
 The SNN is given as input the $k$-cochains on which missing citations are substituted by the median of known citations (as a reasonable first guess) and is trained to minimize the $L_1$ norm over known citations.
 %\mdeff{Could be easier in math than text?}
 We trained SNNs made of $3$ layers with $30$ convolutional filters of degree $N=5$ with Leaky ReLu for $1000$ iterations with the Adam optimizer and a learning rate of $10^{-3}$.
