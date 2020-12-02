@@ -400,93 +400,68 @@
     }
 
 
-  \block{Simplicial Neural Networks}{
-    \vspace{-0.5cm}
- \begin{center}
-\Large{\textbf{Laplacians for simplicial complexes}}
-\end{center}
-\vspace{-0.2cm}
-The graph Laplacian can be extended to Laplacians for simplices of any dimension $k$ \cite{1}. The $k$-Laplacian can be interpreted as a function propagating values of functions on the $k$-simplices. These functions are called $k$-cochains, $x_k$.
+\block{Laplacians for simplicial complexes}{
+The graph Laplacian can be extended to Laplacians for simplices of any dimension $k$ \cite{1}.
+The $k$-Laplacian can be interpreted as a function propagating values of functions on the $k$-simplices.
+These functions are called $k$-cochains, $x_k$.
 \vspace{0.3cm}
-      \begin{center}
-
-      \begin{minipage}{0.2\linewidth}
-		\begin{center}
-		 $L_0$: Graph Laplacian\\
-		$y_0=L_0x_0$
-	\end{center}
-
-      \end{minipage}\hspace{4.5cm}
-      \begin{minipage}{0.2\linewidth}
-         \begin{center}
-		  $L_1$: $1$-Laplacian\\
-		$y_1=L_1x_1$
-	\end{center}
-      \end{minipage} \hspace{4.5cm}
-	\begin{minipage}{0.2\linewidth}
-         \begin{center}
-		 $L_2$: $2$-Laplacian\\
-		$y_2=L_2x_2$
-	\end{center}
-      \end{minipage}
-
-      \end{center}
 
 \begin{center}
-
-		 \begin{minipage}{0.2\linewidth}
-		 \begin{center}
-
-          \includegraphics[height=4.8cm]{figures/glap0.png}
-
-          \vspace{1.2cm}
-
-          \end{center}
-      \end{minipage} \hspace{3.6cm}
-      \begin{minipage}{0.2\linewidth}
-      \begin{center}
-     	\vspace{1.5cm}
-          \includegraphics[height=4.58cm]{figures/glap1.png}
-
-          \vspace{1.2cm}
-
-          \end{center}
-      \end{minipage} \hspace{3.5cm}
-	\begin{minipage}{0.2\linewidth}
-	\begin{center}\
-	\vspace{0.1cm}
-          \includegraphics[height=3.9cm]{figures/glap2.png}
-
-
-          \end{center}
-      \end{minipage}
-      \end{center}
-
-
-
- \begin{center}
-\vspace{-1.5cm}
-\Large{\textbf{Simplicial Neural Networks (SNNs)}}
-\end{center}
-\vspace{-0.5cm}
-\begin{itemize}
-\item The convolutional filters are low-degree polynomials in the Laplacian with learnable coefficients.
-\item The inputs are multiple $k$-cochains on the $k$-simplices, $W_k$.
-\end{itemize}
-
-%, $\sum_{d=0}^{m}\theta_k^d\mathcal{L_k}^dx_k$, where $\theta_k^d$ are the learnable parameters and $x_k$ is the input value on the $k$-simplices.
-\vspace{-0.8cm}
+  \begin{minipage}{0.2\linewidth}
     \begin{center}
-          \includegraphics[height=17.5cm]{figures/snns_figure.pdf}
-          \end{center}
+      $L_0$: Graph Laplacian\\
+      $y_0=L_0x_0$
+	\end{center}
+  \end{minipage}
+  \hspace{4.5cm}
+  \begin{minipage}{0.2\linewidth}
+    \begin{center}
+      $L_1$: $1$-Laplacian\\
+      $y_1=L_1x_1$
+    \end{center}
+  \end{minipage}
+  \hspace{4.5cm}
+  \begin{minipage}{0.2\linewidth}
+    \begin{center}
+      $L_2$: $2$-Laplacian\\
+      $y_2=L_2x_2$
+    \end{center}
+  \end{minipage}
+\end{center}
 
-\begin{enumerate}
-\vspace{-1.4cm}
-\item Convolutions can be implemented by sparse matrix-vector multiplications: the computational cost is $\mathcal{O}(\xi\lvert W_k\rvert)$.
-\item The number of weights to be learned is reduced from $\mathcal{O}(\lvert W_k\rvert)$ to $\mathcal{O}(1)$.
-\item The operation is $d$-localizing: if two simplices are more than $d$ hops apart, there is no interaction between them.
-\end{enumerate}
-\vspace{-0.8cm}
+\begin{center}
+  \begin{minipage}{0.2\linewidth}
+    \begin{center}
+      \includegraphics[height=4.8cm]{figures/glap0.png}
+    \end{center}
+  \end{minipage}
+  \hspace{4.5cm}
+  \begin{minipage}{0.2\linewidth}
+    \begin{center}
+      \vspace{1.5cm}
+      \includegraphics[height=4.58cm]{figures/glap1.png}
+    \end{center}
+  \end{minipage}
+  \hspace{4.5cm}
+  \begin{minipage}{0.2\linewidth}
+    \begin{center}
+      \vspace{0.1cm}
+      \includegraphics[height=3.9cm]{figures/glap2.png}
+    \end{center}
+  \end{minipage}
+\end{center}
+}
+
+
+\block{Simplicial Neural Networks (SNNs)}{
+\begin{center}
+    \includegraphics[width=0.87\linewidth]{figures/snn}
+\end{center}
+\begin{itemize}
+    \item Linear cost: convolutions are sparse matrix-vector multiplications.
+    \item $O(1)$ weights to be learned.
+    \item $d$-localizing: no interaction between simplices that are more than $d$ hops apart.
+\end{itemize}
 }
 
 
