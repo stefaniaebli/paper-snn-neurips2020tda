@@ -12,7 +12,7 @@ def main():
     axs = gs.subplots()
 
     for d in [0, 1, 2]:
-        errors = np.load("Error_dim%d_notsee40.npy" %(d), allow_pickle=False)
+        errors = np.load("data/error_dim%d_notsee40.npy" %(d), allow_pickle=False)
 
         (hist, edges) = np.histogram(np.log10(errors), bins=50)       
         

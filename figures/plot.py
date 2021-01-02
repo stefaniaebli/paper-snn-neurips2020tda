@@ -15,9 +15,8 @@ def main():
     axs = gs.subplots(sharey="row")
 
     for d in [0, 1, 2]:
-        m = np.load("transferlearning_m_mean_dim{}.npy".format(d), allow_pickle=False)
-        h = np.load("transferlearning_h_std_dim{}.npy".format(d), allow_pickle=False)
-
+        m = np.load("data/m_mean_dim{}.npy".format(d), allow_pickle=False)
+        h = np.load("data/h_std_dim{}.npy".format(d), allow_pickle=False)
 
         axs[d].set_title("Dimension %d" %(d))
         axs[d].plot(total_notsee, m, c="C%d" %(d))
@@ -32,7 +31,7 @@ def main():
     axs[1].set_xlabel("% missing")
 
     fig.tight_layout()
-    fig.savefig("foo-transfer.pdf")
+    fig.savefig("foo.pdf")
         
 
 if __name__ == "__main__":
