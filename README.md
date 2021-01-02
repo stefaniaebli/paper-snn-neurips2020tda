@@ -49,6 +49,10 @@ While the PDFs are stored, they can be regenerated with `make figures`.
 A poster is in the [`poster_neurips`](poster_neurips/) folder.
 It is compiled by `make` and a PDF is available at [`doi:10.5281/zenodo.4309827`][poster].
 
+## Peer-review
+
+The reviews, decision, and our answers are in [`review.md`](review.md) and on [OpenReview].
+
 ## History
 
 * 2020-12-28: revision uploaded on arXiv (git tag `arxiv-20201228`)
