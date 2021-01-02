@@ -3,9 +3,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def main():
-    total_notsee=[10,20,30,40,50]
-    total_notsee_x=[0,10,20,30,40,50]
+
+    total_notsee = [10, 20, 30, 40, 50]
+    # total_notsee_x = [0, 10, 20, 30, 40, 50]
 
     plt.rcParams.update({"font.size": 6})
 
@@ -22,17 +24,16 @@ def main():
         axs[d].plot(total_notsee, m, c="C%d" %(d))
         axs[d].fill_between(total_notsee, m-h, m+h, alpha=.2, zorder=0, color="C%d" %(d))
         axs[d].set_xlim((10, 50))
-        axs[d].set_ylim((55,95))
-        axs[d].set_xticks([10, 20, 30, 40,50])
+        axs[d].set_ylim((55, 95))
+        axs[d].set_xticks([10, 20, 30, 40, 50])
         axs[d].set_yticks([60, 70, 80, 90])
 
-    
     axs[0].set_ylabel("Accuracy")
     axs[1].set_xlabel("% missing")
 
     fig.tight_layout()
     fig.savefig("foo-transfer.pdf")
-        
+
 
 if __name__ == "__main__":
     main()
