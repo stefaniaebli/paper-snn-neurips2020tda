@@ -60,3 +60,7 @@ The reviews, decision, and our answers are in [`review.md`](review.md) and on [O
 * 2020-12-01: revision uploaded on OpenReview (git tag `openreview-revised`)
 * 2020-10-07: uploaded on arXiv (git tag `arxiv-20201007`)
 * 2020-10-07: submitted to the TDA@NeurIPS workshop (git tag `neurips-submission`)
+
+## License
+
+This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
