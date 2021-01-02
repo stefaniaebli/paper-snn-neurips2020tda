@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -29,7 +30,8 @@ def main():
     axs[1].set_xlabel("Error")
 
     fig.tight_layout()
-    fig.savefig("foo-2.pdf")
+    filename = os.path.splitext(os.path.basename(__file__))[0] + '.pdf'
+    fig.savefig(filename)
 
 
 if __name__ == "__main__":
