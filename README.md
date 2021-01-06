@@ -1,4 +1,4 @@
-# DeepSphere: a graph-based spherical CNN
+# Simplicial Neural Networks
 
 [Stefania Ebli](https://people.epfl.ch/stefania.ebli),
 [Michaël Defferrard](https://deff.ch),
